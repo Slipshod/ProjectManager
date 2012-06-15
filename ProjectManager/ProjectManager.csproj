@@ -133,6 +133,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JavascriptController.cs" />
+    <Compile Include="Controllers\MustacheController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="DataManager\DropCreateDatabaseTables.cs" />
     <Compile Include="DataManager\ProjectManagerDbContext.cs" />
@@ -214,6 +215,7 @@
     <Content Include="Scripts\Libraries\knockout-2.0.0.js" />
     <Content Include="Scripts\Libraries\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+    <Content Include="Scripts\mustache.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
