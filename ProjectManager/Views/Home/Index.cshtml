@@ -1,0 +1,22 @@
+@using ProjectManager.Models
+@{
+    ViewBag.Title = "Chris' Breakable Toy";
+}
+
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@ViewBag.Title.</h1><br /> 
+            <h2>@ViewBag.Message</h2>
+        </hgroup>
+        <p>
+            This is my breakable toy to use and build out to handle project and and task management.  It is a playground to work on
+            understanding different areas of JS, AJAX, and WepParts to start with.
+        </p>
+    </div>
+</section>
+}
+<hr/>
+
+@Html.Action("ProjectList", "Project")

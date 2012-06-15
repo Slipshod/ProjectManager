@@ -1,0 +1,20 @@
+﻿@model IEnumerable<ProjectManager.Models.Project>
+<div class="projectlist" id="projectlistsmall">
+<table>
+    <tr>
+        <th>
+            Project
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Title)
+    </td>
+    </tr>
+}
+
+</table>
+</div>

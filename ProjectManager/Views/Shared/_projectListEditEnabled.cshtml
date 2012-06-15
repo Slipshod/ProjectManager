@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ProjectManager.Models.Project>
+<div class="projectlist">
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Detail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Completed)
+                </th>
+            
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Title, "Details", new { id = item.ProjectID })  
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Detail)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Completed)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.ProjectID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.ProjectID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot></tfoot>
+    </table>
+</div>
+

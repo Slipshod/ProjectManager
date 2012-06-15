@@ -1,0 +1,23 @@
+﻿@model ProjectManager.Models.Project
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+@Html.Partial("ProjectDisplayFields")
+
+<fieldset id="frmDelete">
+    @Html.HiddenFor(model => model.ProjectID)
+  
+    <p> <input type="button" id="butDelete" value="Confirm Delete" /> </p>
+</fieldset>
+<hr />
+@Html.ActionLink("Back to List", "Index")
+
+  
+    
+
