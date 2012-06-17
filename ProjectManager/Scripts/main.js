@@ -6,7 +6,7 @@
     root.util = {
         makeAjaxRequest : function makeAjaxRequest (url, data) {
             if (!data.redirect) {
-                data.redirect = "/Project";
+                data.redirect = "/";
             }
             $.ajax({
                 type: "POST",
@@ -35,7 +35,7 @@
             var data = {
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
-                Completed: $('#Completed').val()
+                Completed: $('#Completed').is(':checked')
             };
 
             if (data.Title) {

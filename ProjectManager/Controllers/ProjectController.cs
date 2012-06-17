@@ -50,6 +50,7 @@ namespace ProjectManager.Controllers
             return View(project);
         }
 
+        [ChildActionOnly]
         public ViewResult CreatePartial()
         {
             var project = new Project();

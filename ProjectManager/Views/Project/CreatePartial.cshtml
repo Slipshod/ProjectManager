@@ -1,2 +1,9 @@
-﻿<h2>This is the CreatePartial View Result</h2>
+﻿@model ProjectManager.Models.Project
+<h2>This is the CreatePartial View Result</h2>
 
+<div id='ajaxForm'>
+
+@Html.Partial("ProjectEditorFields")
+
+<input type="button" id="butCreate" value="Create New Task"/>
+</div>

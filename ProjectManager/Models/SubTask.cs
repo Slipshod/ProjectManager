@@ -11,6 +11,6 @@ namespace ProjectManager.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public bool Completed { get; set; }
-        public int ProjecId { get; set; }
+        public virtual int ProjectId { get; set; }
     }
 }

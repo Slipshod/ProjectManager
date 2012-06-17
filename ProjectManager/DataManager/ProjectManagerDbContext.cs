@@ -11,5 +11,6 @@ namespace ProjectManager.DataManager
     public class ProjectManagerDbContext : DbContext
     {
         public DbSet<Project> Projects { get; set; }
+        public DbSet<SubTask> SubTasks { get; set; }
     }
 }
