@@ -54,15 +54,19 @@
             var data = {
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
-                Completed: $('#Completed').val(),
+                Completed: $('#Completed').is(':checked'),
                 ProjectID: $('#ProjectID').val()
             };
+            
+            
 
             if (data.Title) {
                 root.util.makeAjaxRequest("/Project/Edit", data);
             } else {
                 console.log('Title was empty');
-            }            
+            }
+            console.log('Edit button was clicked');
+            console.log("Item ID is: " + data.ProjectID);
         }
     };
 
