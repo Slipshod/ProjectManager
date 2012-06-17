@@ -14,6 +14,9 @@ body {
     padding: 0;
 }
 
+
+
+/* Project List Partial Styling */
 .projectlist {
     border: 1px solid;
     border-color: black;    
@@ -21,10 +24,7 @@ body {
     color: orange;
     border-radius: 5px;
     
-}
-
-/* Project List Partial Styling */
-.projectlist table a:link,  .projectlist table a:visited{
+}.projectlist table a:link,  .projectlist table a:visited{
     color: orange;
 }
 
@@ -709,6 +709,33 @@ ul#social li {
             width: auto;
         }
         
+/* Dialogs */
+        .dialogOverlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #5c5c5c;
+        opacity: .5;
+        left: 0;
+        top: 0;
+        z-index: 9;
+        }
+        .dialog{
+        position: absolute;
+        width: 450px;
+        left: 50%;
+        top: 50%;
+        margin-left: -25%;
+        marging-top: -25%;
+        z-index: 10; 
+        }
         
-
+        .butCloseDialog{
+         position: absolute;
+        display: block;
+        top: 5px;
+        right: 10px;
+        text-decoration: none;
+        font-size: 1.25em;
+        }        
 }

@@ -1,16 +1,20 @@
-﻿@model IEnumerable<ProjectManager.Models.Project>
+﻿@using ProjectManager.Models
+@model IEnumerable<Project>
 
-@{
-    ViewBag.Title = "Index";
-}
+@{ ViewBag.Title = "Index"; }
 
-<p>
-    @Html.ActionLink("Create New Project", "Create")
-</p>
-
-@Html.Action("ProjectList", "Project")
+@Html.Partial("ProjectList")
 <hr />
-<div id='actionSelection'>
-    <input type='button' value="Create New Project"/>
-</div>
+
+    @Html.Partial("Create")
+
+
+
+
+<script type="text/mustache" id="formData">
+
+</script>
+
+
 <div id='actionArea'> Select an action.... </div>
+

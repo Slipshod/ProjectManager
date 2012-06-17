@@ -24,6 +24,7 @@ namespace ProjectManager.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.Project = new Project();
             return View(GetProjects());
         }
 
@@ -45,8 +46,17 @@ namespace ProjectManager.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var project = new Project();
+            return View(project);
         }
+
+        public ViewResult CreatePartial()
+        {
+            var project = new Project();
+            return View(project);
+        }
+        
+
 
         //
         // POST: /Project/Create

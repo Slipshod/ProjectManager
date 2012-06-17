@@ -1,24 +1,8 @@
-﻿@model ProjectManager.Models.Project
+﻿@*@model ProjectManager.Models.Project*@
 
-@{
-    ViewBag.Title = "Create";
-}
-<div id="projects">
-@Html.Action("ProjectList", "Project")
-</div>
+<div id='ajaxForm'>
 
-<h2>Create a new Project</h2>
+@Html.Partial("ProjectEditorFields")
 
-<script type="text/javascript"src="@Url.Content("~/Scripts/Libraries/jquery.validate.min.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/Libraries/jquery.validate.unobtrusive.min.js")"></script>
-
-<hr />
-    <fieldset id="ajaxForm">
-        @Html.Partial("ProjectEditorFields")
-    
-    <p> <input type="button" id="butCreate" value="Submit Request" /> </p>
-    </fieldset>
-<hr />
-<div>
-    @Html.ActionLink("Go Home", "Index")
+<input type="button" id="butCreate" value="Create New Task"/>
 </div>
