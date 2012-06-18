@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Chris' Breakable Toy";
 }
+<script src="~/Scripts/Libraries/mustache.js" type="text/javascript"></script>
+<script src="~/Scripts/mainDialogHander.js" type="text/javascript"></script>
 
 @section featured {
 <section class="featured">
@@ -18,5 +20,101 @@
 </section>
 }
 <hr/>
-
+<a href="" id="linkNewProject">Create a new task</a>
 @Html.Action("ProjectList", "Project")
+<hr />
+    <div class="projectlist">
+        <table>
+            <thead>
+                <tr>
+                    <th>Short Description</th>
+                    <th>Detail</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tablerow"> </tbody>
+        </table>
+    </div>
+   
+
+
+<div  id='createForm' class="dialog" style="display: none;">
+    <a href="" id="butCloseDialog">&times;</a>
+    <div id="ajaxForm">
+        <div class="editor-label"> <label for="Title">Short Description</label> </div>
+        <div class="editor-field">
+            <input class="text-box single-line" id="Title" name="Title" type="text" value="" /> 
+        </div>
+        <div class="editor-label"> <label for="Detail">Detail</label> </div>
+        <div class="editor-field">
+            <input class="text-box single-line" id="Detail" name="Detail" type="text" value="" />
+        </div>
+        <div class="editor-label">
+            <label for="Completed">Completed</label> 
+        </div>
+        <div class="editor-field">
+            <input class="check-box" id="Completed" name="Completed" type="checkbox" value="true" />
+        </div>
+        <p>
+            <input type="button" id="butCreate" value="Submit Request" /> 
+        </p>
+    </div>    
+</div>
+
+<div class="dialogOverlay" style="display: none;"></div>
+
+
+<script type="text/mustache" id="template">
+<tr>    
+    <td>{{Title}}</td>
+    <td>{{Detail}}</td>
+    <td>
+        <input type="checkbox" checked="{{Completed}}"/>
+    </td>
+    <td>
+        <a href="/Project/Edit/{{ProjectID}}">Edit</a>  | 
+        <a href="/Project/Delete/{{ProjectID}}">Delete</a>
+    </td>
+</tr>
+</script>
+
+<script type="text/javascript">
+    var worker = {
+        Title: "Start converting to WebParts",
+        Detail: "Almost ready to start converting",
+        ProjectID: "10",
+        Completed: "false"
+    };
+
+    (function () {
+        var template = $('#template').html();
+        var outputHtml = Mustache.to_html(template, worker);
+        $('#tablerow').html(outputHtml);
+    })();
+    
+    $("#linkNewProject").click(function (){
+    $('.dialogOverlay').fadeIn(250,function(){
+        $('.dialog').fadeIn(150);
+    });
+
+    console.log('new project link was clicked');
+});
+
+$('.butCloseDialog').live("click", function(event){
+    var element = $(event.currentTarget);
+    var dialog = element.parents('.dialog');
+    var overlay = dialog.next();
+
+    dialog.fadeOut(250, function (){
+        overlay.fadeOut(250, function(){
+              dialog.delete();
+              overlay.delete();            
+        });
+    });    
+       
+});
+    
+</script> 
+
+

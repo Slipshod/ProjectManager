@@ -1,11 +1,9 @@
 ﻿$("#linkNewProject").click(function (){
-    var formOutputHtml = Mustache.to_html($('#formData').html(), worker);
-    //... populate data
-    
-    $('#myForm').html(formOutputHtml);
     $('.dialogOverlay').fadeIn(250,function(){
         $('.dialog').fadeIn(150);
     });
+
+    console.log('new project link was clicked');
 });
 
 $('.butCloseDialog').live("click", function(event){

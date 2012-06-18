@@ -65,8 +65,6 @@
             } else {
                 console.log('Title was empty');
             }
-            console.log('Edit button was clicked');
-            console.log("Item ID is: " + data.ProjectID);
         }
     };
 
