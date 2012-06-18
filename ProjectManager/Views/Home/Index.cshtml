@@ -3,7 +3,7 @@
     ViewBag.Title = "Chris' Breakable Toy";
 }
 <script src="~/Scripts/Libraries/mustache.js" type="text/javascript"></script>
-<script src="~/Scripts/mainDialogHander.js" type="text/javascript"></script>
+@*<script src="~/Scripts/mainDialogHander.js" type="text/javascript"></script>*@
 
 @section featured {
 <section class="featured">
@@ -20,7 +20,7 @@
 </section>
 }
 <hr/>
-<a href="" id="linkNewProject">Create a new task</a>
+<input type="button" id="linkNewProject" value="Create a new task"/>
 @Html.Action("ProjectList", "Project")
 <hr />
     <div class="projectlist">
@@ -40,7 +40,7 @@
 
 
 <div  id='createForm' class="dialog" style="display: none;">
-    <a href="" id="butCloseDialog">&times;</a>
+    <a href="#" class="butCloseDialog">&times;</a>
     <div id="ajaxForm">
         <div class="editor-label"> <label for="Title">Short Description</label> </div>
         <div class="editor-field">
@@ -93,28 +93,7 @@
         $('#tablerow').html(outputHtml);
     })();
     
-    $("#linkNewProject").click(function (){
-    $('.dialogOverlay').fadeIn(250,function(){
-        $('.dialog').fadeIn(150);
-    });
-
-    console.log('new project link was clicked');
-});
-
-$('.butCloseDialog').live("click", function(event){
-    var element = $(event.currentTarget);
-    var dialog = element.parents('.dialog');
-    var overlay = dialog.next();
-
-    dialog.fadeOut(250, function (){
-        overlay.fadeOut(250, function(){
-              dialog.delete();
-              overlay.delete();            
-        });
-    });    
-       
-});
-    
+        
 </script> 
 
 

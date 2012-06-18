@@ -19,3 +19,4 @@ $('.butCloseDialog').live("click", function(event){
     });    
        
 });
+
