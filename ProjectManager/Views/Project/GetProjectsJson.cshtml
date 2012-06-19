@@ -1,0 +1,42 @@
+﻿<div class="projectlist">
+        <table>
+            <thead>
+                <tr>
+                    <th>Short Description</th>
+                    <th>Detail</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tablerow"> </tbody>
+        </table>
+    </div>
+   
+<script type="text/mustache" id="projectListTemplate">
+<tr>    
+    <td>{{Title}}</td>
+    <td>{{Detail}}</td>
+    <td>
+        <input type="checkbox" checked="{{Completed}}"/>
+    </td>
+    <td>
+        <a href="/Project/Edit/{{ProjectId}}">Edit</a>  | 
+        <a href="/Project/Delete/{{ProjectId}}">Delete</a>
+    </td>
+</tr>
+</script>
+
+<script type="text/javascript">
+
+    //Replace this with JSON from /Project/GetProjects()
+    //Once that is done, can get rid of the Html.Action("ProjectList", "Project")
+    $(document).ready(function() {
+        $.getJSON('/Project/GetProjectsJson'), function (data) {
+            var projectListTemplate = $('#projectListTemplate').html();
+            var outputHtml = Mustache.to_html(projectListTemplate, data);
+            $('#tablerow').html(outputHtml);
+            console.log('data');
+        };
+    });
+
+</script> 

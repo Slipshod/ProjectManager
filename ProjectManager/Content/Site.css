@@ -330,7 +330,7 @@ aside {
     width: 45%;
 }
 
-    #loginForm .validation-error {
+#loginForm .validation-error {
         display: block;
         margin-left: 15px;
     }
@@ -378,7 +378,7 @@ fieldset {
         list-style: none;
     }
 
-        fieldset ol li {
+    fieldset ol li {
             padding-bottom: 5px;
         }
 
@@ -402,8 +402,8 @@ fieldset {
         width: 300px;
     }
 
-        fieldset input[type="text"]:focus,
-        fieldset input[type="password"]:focus {
+    fieldset input[type="text"]:focus,
+    fieldset input[type="password"]:focus {
             border: 1px solid #7ac0da;
         }
 
@@ -416,12 +416,8 @@ fieldset {
         padding: 7px;
     }
     
-    fieldset div .editor-label {
-        
-    }
-        fieldset div .editor-field {
-        
-    }
+fieldset div .editor-label {}
+fieldset div .editor-field {}
 
 
 .display-field, .display-fieldset {
@@ -450,10 +446,10 @@ fieldset .review {
     font-size: 0.7em;
 }
 
-    .modal-popup input[type="text"],
-    .modal-popup input[type="password"] {
-        width: 90%;
-    }
+.modal-popup input[type="text"],
+.modal-popup input[type="password"] {
+    width: 90%;
+}
 
 /* info and errors */
 .message-info {
@@ -511,239 +507,63 @@ ul#social li {
     list-style: none;
 }
 
-    ul#social li a {
-        color: #999;
-        text-decoration: none;
-    }
-
-    a.facebook, a.twitter {
-        display: block;
-        float: left;
-        height: 24px;
-        padding-left: 17px;
-        text-indent: -9999px;
-        width: 16px;
-    }
-
-    a.facebook {
-        background: url("../Images/facebook.png") no-repeat;
-    }
-
-    a.twitter {
-        background: url("../Images/twitter.png") no-repeat;
-    }
-/* Dialogs */
-        .dialogOverlay {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        background-color: #5c5c5c;
-        opacity: .5;
-        left: 0;
-        top: 0;
-        z-index: 9;
-        }
- .dialog
-        {
-            
-        position: absolute;
-        width: 450px;
-        left: 50%;
-        top: 50%;
-        margin-left: -25%;
-        marging-top: -25%;
-        z-index: 10;
-        padding: 1.5em;
-        border: 1px solid navy;
-        border-radius: 10px;
-            color: orange;
-        background-color: rgb(85, 85, 85); 
-        }
-        
-        .butCloseDialog{
-         position: absolute;
-        display: block;
-        top: 5px;
-        right: 10px;
-        text-decoration: none;
-        font-size: 1.25em;
-        }       
-
-
-/********************
-*   Mobile Styles   *
-********************/
-@media only screen and (max-width: 850px) {
-
-    /* header
-    ----------------------------------------------------------*/
-    header .float-left,
-    header .float-right {
-        float: none;
-    }
-
-    /* logo */
-    header .site-title {
-        margin: 10px;
-        text-align: center;
-    }
-
-    /* login */
-    #login {
-        font-size: .85em;
-        margin: 0 0 12px;
-        text-align: center;
-    }
-
-        #login ul {
-            margin: 5px 0;
-            padding: 0;
-        }
-
-        #login li {
-            display: inline;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        #login a {
-            background: none;
-            color: #999;
-            font-weight: 600;
-            margin: 2px;
-            padding: 0;
-        }
-
-        #login a:hover {
-            color: #333;
-        }
-
-    /* menu */
-    nav {
-        margin-bottom: 5px;
-    }
-
-    ul#menu {
-        margin: 0;
-        padding: 0;
-        text-align: center;
-    }
-
-        ul#menu li {
-            margin: 0;
-            padding: 0;
-        }
-
-
-    /* main layout
-    ----------------------------------------------------------*/
-    .main-content,
-    .featured + .main-content {
-        background-position: 10px 0;
-    }
-
-    .content-wrapper {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-
-    .featured .content-wrapper {
-        padding: 10px;
-    }
-
-    /* page content */
-    article, aside {
-        float: none;
-        width: 100%;
-    }
-
-    /* ordered list */
-    ol.round {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-        ol.round li {
-            padding-left: 10px;
-            margin: 25px 0;
-        }
-
-            ol.round li.one,
-            ol.round li.two,
-            ol.round li.three {
-                background: none;
-            }
-
-     /* features */
-     section.feature {
-        float: none;
-        padding: 10px;
-        width: auto;
-     }
-
-        section.feature img {
-            color: #999;
-            content: attr(alt);
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-    /* forms */
-    fieldset input[type="text"],
-    fieldset input[type="password"] {
-        width: 90%;
-    }
-
-    /* login page */
-    #loginForm {
-        border-right: none;
-        float: none;
-        width: auto;
-    }
-
-        #loginForm .validation-error {
-            display: block;
-            margin-left: 15px;
-        }
-
-    #socialLoginForm {
-        margin-left: 0;
-        float: none;
-        width: auto;
-    }
-
-    /* footer
-    ----------------------------------------------------------*/
-    footer .float-left,
-    footer .float-right {
-        float: none;
-    }
-
-    footer {
-        text-align: center;
-        height: auto;
-        padding: 10px 0;
-    }
-
-        footer p {
-            margin: 0;
-        }
-
-        ul#social {
-            padding: 0;
-            margin: 0;
-        }
-
-        a.facebook, a.twitter {
-            background: none;
-            display: inline;
-            float: none;
-            height: auto;
-            padding-left: 0;
-            text-indent: 0;
-            width: auto;
-        }
-        
-     
+ul#social li a {
+    color: #999;
+    text-decoration: none;
 }
+
+a.facebook, a.twitter {
+    display: block;
+    float: left;
+    height: 24px;
+    padding-left: 17px;
+    text-indent: -9999px;
+    width: 16px;
+}
+
+a.facebook {
+    background: url("../Images/facebook.png") no-repeat;
+}
+
+a.twitter {
+    background: url("../Images/twitter.png") no-repeat;
+}
+/* Dialogs */
+.dialogOverlay 
+{
+    background-color: #5c5c5c;    
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: .5;
+    left: 0;
+    top: 0;
+    z-index: 9;
+    }
+ .dialog 
+ {
+    color: orange;
+    background-color: rgb(85, 85, 85);     
+    position: absolute;
+    width: 450px;
+    left: 50%;
+    top: 50%;
+    margin-left: -25%;
+    margin-top: -25%;
+    z-index: 10;
+    padding: 1.5em;
+    border: 1px solid navy;
+    border-radius: 10px;
+ 
+    }
+        
+.butCloseDialog{
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 10px;
+    text-decoration: none;
+    font-size: 1.25em;
+    }       
+
+

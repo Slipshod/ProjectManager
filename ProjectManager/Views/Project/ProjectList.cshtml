@@ -1,28 +1,46 @@
-﻿@model IEnumerable<ProjectManager.Models.Project>
+﻿<script type="text/javascript">
 
-<div class="projectlist">
-    <table>
-        <thead>
-            <tr>
-                <th> @Html.DisplayNameFor(model => model.Title) </th>
-                <th> @Html.DisplayNameFor(model => model.Detail) </th>
-                <th> @Html.DisplayNameFor(model => model.Completed) </th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model) {
+    $(document).ready(function () {
+        $.getJSON('/Project/GetProjectsJson', null, function (data) {
+            var listTemplate = $('#projectListTemplate').html();
+            var outputHtml = Mustache.to_html(listTemplate, data);
+            $('#tablerow').html(outputHtml);
+        });
+    });
+    
+
+
+</script> 
+
+
+<div class="projectlist" id="projectList">
+        <table>
+            <thead>
                 <tr>
-                    <td> @item.Title </td>
-                    <td> @Html.DisplayFor(modelItem => item.Detail) </td>
-                    <td> @Html.DisplayFor(modelItem => item.Completed) </td>
-                    <td> @Html.ActionLink("Edit", "Edit", new { id = item.ProjectID })  | 
-                         @Html.ActionLink("Delete", "Delete",  new { id = item.ProjectID })
-                    </td>
+                    <th>Short Description</th>
+                    <th>Detail</th>
+                    <th>Completed</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-        <tfoot></tfoot>
-    </table>
+            </thead>
+            <tbody id="tablerow"> </tbody> 
+ </table>       
 </div>
+   
+<script type="text/mustache" id="projectListTemplate">
+   
+
+{{#projects}}
+<tr>    
+    <td>{{Title}}</td>
+    <td>{{Detail}}</td>
+    <td></td>
+    <td>
+        <input type="button" data-id="{{ProjectID}}" class="editLink" value="Edit">  | 
+        <input type="button" data-id="{{ProjectID}}" class="deleteLink" value="Delete">
+    </td>
+</tr>
+{{/projects}}
+
+</script>
 

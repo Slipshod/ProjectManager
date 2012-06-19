@@ -8,13 +8,13 @@
 
 <h3>Are you sure you want to delete this?</h3>
 
-@Html.Partial("ProjectDisplayFields")
 
-<fieldset id="frmDelete">
+
+<div id="ajaxForm">
     @Html.HiddenFor(model => model.ProjectID)
-  
+    @Html.Partial("ProjectDisplayFields")
     <p> <input type="button" id="butDelete" value="Confirm Delete" /> </p>
-</fieldset>
+</div>
 <hr />
 @Html.ActionLink("Back to List", "Index")
 

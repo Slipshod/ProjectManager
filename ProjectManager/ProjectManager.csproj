@@ -145,6 +145,7 @@
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\SubTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\AddProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -242,9 +243,6 @@
     <Content Include="Views\Project\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Project\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Project\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -281,10 +279,10 @@
     <Content Include="Views\Project\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Project\CreatePartial.cshtml" />
+    <Content Include="Views\Project\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Project\Edit.cshtml" />
+    <Content Include="Views\Project\GetProjectsJson.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -24,21 +24,8 @@ namespace ProjectManager.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Project = new Project();
+//            ViewBag.Project = new Project();
             return View(GetProjects());
-        }
-
-        //
-        // GET: /Project/Details/5
-
-        public ActionResult Details(int id = 0)
-        {
-            var project = _db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            return View(project);
         }
 
         //
@@ -50,13 +37,7 @@ namespace ProjectManager.Controllers
             return View(project);
         }
 
-        [ChildActionOnly]
-        public ViewResult CreatePartial()
-        {
-            var project = new Project();
-            return View(project);
-        }
-        
+     
 
 
         //
@@ -86,28 +67,23 @@ namespace ProjectManager.Controllers
         //
         // GET: /Project/Edit/5
 
-        public ActionResult Edit(int id = 0)
+        public ActionResult Edit(ProjectModel model)
         {
-            var project = _db.Projects.Find(id);
-            if (project == null)
-            {
-                return HttpNotFound();
-            }
-            return View(project);
+
+            return GetProjectJson(model.ProjectID);
         }
 
         //
         // POST: /Project/Edit/5
 
-        [HttpPost]
-        public ActionResult Edit(ProjectModel model)
+        [HttpPost, ActionName("Edit")]
+        public ActionResult ConfirmEdit(Project model)
         {
             if (ModelState.IsValid)
             {
-                var project = Mapper.Map<ProjectModel, Project>(model);
-                _db.Entry(project).State = EntityState.Modified;
+                _db.Entry(model).State = EntityState.Modified;
                 _db.SaveChanges();
-                return Redirect("/Project");
+                return Redirect("/");
             }
             return View("Index");
         }
@@ -115,27 +91,25 @@ namespace ProjectManager.Controllers
         //
         // GET: /Project/Delete/5
 
-        public ActionResult Delete(int id = 0)
+        public ActionResult Delete(ProjectModel model)
         {
-            var project = _db.Projects.Find(id);
-            if (project == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(project);
+            return GetProjectJson(model.ProjectID);
         }
 
         //
         // POST: /Project/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(ProjectModel model)
+        public ActionResult ConfirmDelete(ProjectModel model)
         {
-            var project = Mapper.Map<ProjectModel, Project>(model);
-            project = _db.Projects.Find(project.ProjectID);
-            _db.Projects.Remove(project);
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            var project = _db.Projects.Find(model.ProjectID);
+            if (ModelState.IsValid)
+            {
+                //var project = Mapper.Map<ProjectModel, Project>(model);
+                _db.Projects.Remove(project);
+                _db.SaveChanges();
+            }
+            return Redirect("/");
         }
 
         public ActionResult ProjectEditorFields()
@@ -159,7 +133,20 @@ namespace ProjectManager.Controllers
         private ICollection<Project> GetProjects()
         {
             return (_db.Projects.ToList());
-        } 
+        }
 
+        public ActionResult GetProjectsJson(bool asJson = true)
+        {
+            var projectList = new {projects = GetProjects()};
+
+           return Json(projectList, JsonRequestBehavior.AllowGet);
+            
+        }
+
+        public ActionResult GetProjectJson(int id = 0)
+        {
+            var project = _db.Projects.Find(id);
+            return Json(project, JsonRequestBehavior.AllowGet);
+        }
     }
 }
