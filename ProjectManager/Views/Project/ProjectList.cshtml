@@ -1,15 +1,11 @@
 ﻿<script type="text/javascript">
-
-    $(document).ready(function () {
-        $.getJSON('/Project/GetProjectsJson', null, function (data) {
-            var listTemplate = $('#projectListTemplate').html();
-            var outputHtml = Mustache.to_html(listTemplate, data);
-            $('#tablerow').html(outputHtml);
-        });
-    });
-    
-
-
+//    $(document).ready(function () {
+//        $.getJSON('/Project/GetProjectsJson', null, function (response) {
+//            var listTemplate = $('#projectListTemplate').html();
+//            var outputHtml = Mustache.to_html(listTemplate, response);
+//            $('#tablerow').html(outputHtml);
+//        });
+//    });
 </script> 
 
 
@@ -17,32 +13,30 @@
         <table class="projectListTable">
             <thead>
                 <tr>
-                    <th>Short Description</th>
-                    <th>Detail</th>
-                    <th>Completed</th>
+                    <th class="titleColumn">Short Description</th>
+                    <th class="detailColumn">Detail</th>
+                    <th class="completedColumn">Completed</th>
                     <th class="actionsColumn">Actions</th>
                 </tr>
             </thead>
             <tbody id="tablerow"> </tbody> 
- </table>       
+            <tfoot></tfoot>
+        </table>       
 </div>
+<hr />
    
 <script type="text/mustache" id="projectListTemplate">
-   
-
 {{#projects}}
 <tr>    
     <td class="titleColumn">{{Title}}</td>
     <td class="detailColumn">{{Detail}}</td>
     <td class="completedColumn">{{Completed}}</td>
-    <td class="actionsColumn
-<td class="actionsColumn">
-    <a data-id="{{ProjectID}}" class="editLink">Edit</a> |
-    <a data-id="{{ProjectID}}" class="deleteLink">Delete</a>
-</td>
+    <td class="actionsColumn">
+        <a data-id="{{ProjectID}}" class="editLink">Edit</a> |
+        <a data-id="{{ProjectID}}" class="deleteLink">Delete</a>
+    </td>
 </tr>
 {{/projects}}
-
 </script>
 
 

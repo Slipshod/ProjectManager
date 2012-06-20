@@ -20,68 +20,99 @@ body {
 .deleteLink, .editLink {
     cursor: pointer;
     font-size: 1em;
+    font-weight: bold;
     text-decoration: none;
+    color: oldlace;
 }
-
 .deleteLink a:hover, .editLink a:hover {
     text-decoration: underline;
-    font-size: 1em;
+    
 }
-
-.projectlist {
+.projectListTable {
     border: 1px solid;
     border-color: black;    
     background-color: #3f3f3f;
     color: orange;
     border-radius: 5px;
     
-}.projectlist table a:link,  .projectlist table a:visited{
+}
+.projectListTable table a:link,  .projectlist table a:visited{
     color: orange;
 }
-
-.projectlist #projectlistsmall {
-    display: inline-block;
+#projectlistsmall {
+    display: block;
+    clear: both;
+    height: 50px;
+    width: 200px;    
     max-width: 250px;
+    min-height: 20px;
+    background-image: linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -o-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -moz-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -webkit-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -ms-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.77, rgb(13,107,214)),
+	    color-stop(0.19, rgb(16,73,133))
+    );
 }
-
-.projectlist table {
+.projectListTable table {
     color: orange;
     border: none;
-    padding: 3px;
+    padding: 0px;
     margin: 3px;
-}
+    background-image: linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -o-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -moz-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -webkit-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
+    background-image: -ms-linear-gradient(bottom, rgb(13,107,214) 77%, rgb(16,73,133) 19%);
 
-.projectlist th {
-    background-color: #6f6f6f;
+    background-image: -webkit-gradient(
+	    linear,
+	    left bottom,
+	    left top,
+	    color-stop(0.77, rgb(13,107,214)),
+	    color-stop(0.19, rgb(16,73,133))
+    );    
 }
-
-.projectlist table caption {
+.projectListTable thead {
+    background-color: #e2e1e1;
+    color: rgb(76, 76, 76);
+    border-style: solid;
+    border-bottom: 2px orange;
+}
+.projectListTable table caption {
     font-size: 1.2em;
     color: #f0f0f0;
     font-weight: bold;
 }
-
-.projectListTable {
-    min-width: 415px;
-    
+.projectListTable {}
+.projectListTable tbody tr:nth-child(odd) {
+    background-color: #6f6f6f;
 }
-
-.projectListTable tr td {
-    min-width: 100px;
-}
-
-.actionsColumn {
+.projectListTable tr td { padding: .1em .25em .1em .25em;}
+.projectListTable .actionsColumn {
     width: 115px;
     text-align: center;
 }
+.projectListTable .titleColumn{ width: 40em;}
+.projectListTable .detailColumn{ width: 60em;}
+.projectListTable .completedColumn 
+{
+    width: 4em;
+    text-align: center;
+}
 /* Project List Partial Styling */
-
 a:link, a:visited,
 a:active, a:hover {
     color: #333;
     outline: none;
-    padding-left: 3px;
+/*    padding-left: 3px;
     padding-right: 3px;
+*/
     text-decoration: underline;
 }
 

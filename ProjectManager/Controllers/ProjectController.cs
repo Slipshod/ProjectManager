@@ -24,8 +24,7 @@ namespace ProjectManager.Controllers
 
         public ActionResult Index()
         {
-//            ViewBag.Project = new Project();
-            return View(GetProjects());
+            return View();
         }
 
         //
