@@ -27,13 +27,72 @@ if (!fbi) { var fbi = {}; }
         }
     };
     
-    root.project = {};
+    root.project = {
+        //TODO: should project utilities, ie, Actions, etc go here?
+    };
     
 }(root, fbi, jQuery));
 (function (root, fbi, Mustache, $) {
     "use strict";
     //var document;
     var controller = {
+        init: function init(){
+            console.log('controller.init was called');
+        //Click Event Listeners
+        $("#butDelete").live("click", controller.remove);
+        $("#butCreate").live("click", controller.create);
+        $("#butEdit").live("click", controller.edit);
+        $("#linkNewProject").live("click", function() {
+            var template = $('#createProject').html();
+            var data = {
+                Title: $('#Title').val(),
+                Detail: $('#Detail').val(),
+                Completed: $('#Completed').is(':checked')
+            };
+            var outputHtml = Mustache.to_html(template, data);
+            controller.showDialog(outputHtml);
+        });
+        $(".editLink").live("click", function() {
+            var projectId = $(this).attr("data-id");
+            var data = {
+                ProjectID: projectId
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Project/Edit",
+                data: data,
+                success: function(response) {
+                    var template = $('#editProject').html();
+                    var outputHtml = Mustache.to_html(template, response);
+                    controller.showDialog(outputHtml);
+                }
+            });
+
+        });
+        $(".deleteLink").live("click", function() {
+            var projectId = $(this).attr("data-id");
+
+            //Currently the Delete action is returning the correct item to delete as Json
+            var data = {
+                ProjectID: projectId
+            };
+            $.ajax({
+                type: "GET",
+                url: "/Project/Delete",
+                data: data,
+                success: function(response) {
+                    var template = $('#deleteProject').html();
+                    var outputHtml = Mustache.to_html(template, response);
+                    controller.showDialog(outputHtml);
+                }               
+            });
+
+        });
+        $('.butCloseDialog').live("click", function(event) {
+            controller.hideDialog(event);
+        });
+            
+        },
         create: function create(e) {
             var data = {
                 Title: $('#Title').val(),
@@ -135,74 +194,21 @@ if (!fbi) { var fbi = {}; }
         loadInitialProjectData: function loadInitialProjectData() {
             controller.refreshProjectList();
         }
+
     }; // END var controller
 
     $(document).ready(function docReady() {
-        //Click Event Listeners
-        $("#butDelete").live("click", controller.remove);
-        $("#butCreate").live("click", controller.create);
-        $("#butEdit").live("click", controller.edit);
-        $("#linkNewProject").live("click", function() {
-            var template = $('#createProject').html();
-            var data = {
-                Title: $('#Title').val(),
-                Detail: $('#Detail').val(),
-                Completed: $('#Completed').is(':checked')
-            };
-            var outputHtml = Mustache.to_html(template, data);
-            controller.showDialog(outputHtml);
-        });
-        $(".editLink").live("click", function() {
-            var projectId = $(this).attr("data-id");
-            var data = {
-                ProjectID: projectId
-            };
-            $.ajax({
-                type: "GET",
-                url: "/Project/Edit",
-                data: data,
-                success: function(response) {
-                    var template = $('#editProject').html();
-                    var outputHtml = Mustache.to_html(template, response);
-                    controller.showDialog(outputHtml);
-                }
-            });
-
-        });
-        $(".deleteLink").live("click", function() {
-            var projectId = $(this).attr("data-id");
-
-            //Currently the Delete action is returning the correct item to delete as Json
-            var data = {
-                ProjectID: projectId
-            };
-            $.ajax({
-                type: "GET",
-                url: "/Project/Delete",
-                data: data,
-                success: function(response) {
-                    var template = $('#deleteProject').html();
-                    var outputHtml = Mustache.to_html(template, response);
-                    controller.showDialog(outputHtml);
-                }               
-            });
-
-        });
-        $('.butCloseDialog').live("click", function(event) {
-            controller.hideDialog(event);
-        });
-
         // Bus Responders
-        // Handle internal events that are not UI events
-        fbi.bus.once("project.documentReady", controller.loadInitialProjectData);
+        // Handle internal events that are not UI events        
+        fbi.bus.once("project.initialize", controller.init());        
+        fbi.bus.once("project.getAllProjectsOnInitialPageLoad", controller.loadInitialProjectData);
         fbi.bus.on("project.action", function(options) {
             root.util.makeAjaxRequest(options.url || "", options.data || { }, options.verb || "POST");
         });
         fbi.bus.on("dialog.isFinished", controller.hideDialogAndRefresh);
         // END Bus Responders
 
-
-        fbi.bus.emit('project.documentReady');
+        fbi.bus.emit("project.getAllProjectsOnInitialPageLoad");
     }); // END $(document).ready      
 
 
