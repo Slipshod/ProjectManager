@@ -17,6 +17,17 @@ body {
 
 
 /* Project List Partial Styling */
+.deleteLink, .editLink {
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: none;
+}
+
+.deleteLink a:hover, .editLink a:hover {
+    text-decoration: underline;
+    font-size: 1em;
+}
+
 .projectlist {
     border: 1px solid;
     border-color: black;    
@@ -48,6 +59,20 @@ body {
     font-size: 1.2em;
     color: #f0f0f0;
     font-weight: bold;
+}
+
+.projectListTable {
+    min-width: 415px;
+    
+}
+
+.projectListTable tr td {
+    min-width: 100px;
+}
+
+.actionsColumn {
+    width: 115px;
+    text-align: center;
 }
 /* Project List Partial Styling */
 

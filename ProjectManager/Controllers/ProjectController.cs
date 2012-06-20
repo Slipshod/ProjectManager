@@ -53,8 +53,7 @@ namespace ProjectManager.Controllers
                 _db.SaveChanges();
                 return Json(new
                                 {
-                                    Success = true,
-                                    RedirectUrl = "/"
+                                    Success = true
                                 });
             }
 
@@ -83,9 +82,9 @@ namespace ProjectManager.Controllers
             {
                 _db.Entry(model).State = EntityState.Modified;
                 _db.SaveChanges();
-                return Redirect("/");
+                
             }
-            return View("Index");
+            return Json(new { Success = true });
         }
 
         //
@@ -109,7 +108,7 @@ namespace ProjectManager.Controllers
                 _db.Projects.Remove(project);
                 _db.SaveChanges();
             }
-            return Redirect("/");
+            return Json(new {Success = true});
         }
 
         public ActionResult ProjectEditorFields()

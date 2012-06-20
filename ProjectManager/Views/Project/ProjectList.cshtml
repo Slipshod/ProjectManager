@@ -14,13 +14,13 @@
 
 
 <div class="projectlist" id="projectList">
-        <table>
+        <table class="projectListTable">
             <thead>
                 <tr>
                     <th>Short Description</th>
                     <th>Detail</th>
                     <th>Completed</th>
-                    <th>Actions</th>
+                    <th class="actionsColumn">Actions</th>
                 </tr>
             </thead>
             <tbody id="tablerow"> </tbody> 
@@ -32,15 +32,18 @@
 
 {{#projects}}
 <tr>    
-    <td>{{Title}}</td>
-    <td>{{Detail}}</td>
-    <td></td>
-    <td>
-        <input type="button" data-id="{{ProjectID}}" class="editLink" value="Edit">  | 
-        <input type="button" data-id="{{ProjectID}}" class="deleteLink" value="Delete">
-    </td>
+    <td class="titleColumn">{{Title}}</td>
+    <td class="detailColumn">{{Detail}}</td>
+    <td class="completedColumn">{{Completed}}</td>
+    <td class="actionsColumn
+<td class="actionsColumn">
+    <a data-id="{{ProjectID}}" class="editLink">Edit</a> |
+    <a data-id="{{ProjectID}}" class="deleteLink">Delete</a>
+</td>
 </tr>
 {{/projects}}
 
 </script>
+
+
 

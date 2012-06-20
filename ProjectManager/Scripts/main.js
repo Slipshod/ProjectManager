@@ -85,17 +85,13 @@
         });
     });        
     
-
-    
-
-
-    var controller = {
+   var controller = {
         create: function create(e) {
             var data = {
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
-                Completed: $('#Completed').is(':checked'), 
-                redirect: "/"
+                Completed: $('#Completed').is(':checked') 
+                
             };
             if (data.Title) {
                 root.util.makeAjaxRequest("/Project/Create", data);
@@ -103,20 +99,15 @@
             } else {
                 console.log('Title was empty');
             }
-            $('.dialog').hide();
-            $('.dialogOverlay').hide();
-            controller.refreshProjectList();
+            controller.hideDialogAndRefresh();
             
         },
-
         remove: function remove(e) {
             var data = {
                 ProjectID: $('#ProjectID').val()
                 };
             root.util.makeAjaxRequest("/Project/Delete", data, "POST");
-            $('.dialog').hide();
-            $('.dialogOverlay').hide();
-            controller.refreshProjectList();
+            controller.hideDialogAndRefresh();
             
         },
         edit: function edit(e) {
@@ -124,8 +115,7 @@
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
                 Completed: $('#Completed').is(':checked'),
-                ProjectID: $('#ProjectID').val(),
-                redirect: "/"
+                ProjectID: $('#ProjectID').val()
             };
 
             if (data.Title) {
@@ -133,10 +123,7 @@
             } else {
                 console.log('Title was empty');
             }
-
-            $('.dialog').hide();
-            $('.dialogOverlay').hide();
-            controller.refreshProjectList();
+            controller.hideDialogAndRefresh();
             
         },
         refreshProjectList: function refreshProjectList(e) {
@@ -173,7 +160,13 @@
             });
         });    
             
+        },
+        hideDialogAndRefresh: function hideDialogAndRefresh() {
+            $('.dialog').hide();
+            $('.dialogOverlay').hide();
+            controller.refreshProjectList();            
         }
+         
     };
 
     if (!root.controllers) {
