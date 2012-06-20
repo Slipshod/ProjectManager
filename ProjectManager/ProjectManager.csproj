@@ -181,6 +181,7 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\base.js" />
     <Content Include="Scripts\Libraries\jquery-1.7.2.js" />
     <Content Include="Scripts\Libraries\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\Libraries\jquery-ui-1.8.11.min.js" />
@@ -191,12 +192,12 @@
     <Content Include="Scripts\Libraries\jquery.validate.min.js" />
     <Content Include="Scripts\Libraries\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\Libraries\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Libraries\underscore.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\Libraries\knockout-2.0.0.debug.js" />
     <Content Include="Scripts\Libraries\knockout-2.0.0.js" />
     <Content Include="Scripts\Libraries\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\Libraries\mustache.js" />
-    <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
