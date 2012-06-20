@@ -103,6 +103,10 @@
             } else {
                 console.log('Title was empty');
             }
+            $('.dialog').hide();
+            $('.dialogOverlay').hide();
+            controller.refreshProjectList();
+            
         },
 
         remove: function remove(e) {
@@ -110,6 +114,9 @@
                 ProjectID: $('#ProjectID').val()
                 };
             root.util.makeAjaxRequest("/Project/Delete", data, "POST");
+            $('.dialog').hide();
+            $('.dialogOverlay').hide();
+            controller.refreshProjectList();
             
         },
         edit: function edit(e) {
@@ -126,7 +133,9 @@
             } else {
                 console.log('Title was empty');
             }
-            
+
+            $('.dialog').hide();
+            $('.dialogOverlay').hide();
             controller.refreshProjectList();
             
         },
@@ -140,6 +149,11 @@
         });
         },
         showDialog: function dialogManager(outputHtml) {
+            if ($('.dialog')){
+                console.log('.dialog window FOUND!');
+            } else {
+                console.log('.dialog window not found');
+            }
             $('.dialog').html(outputHtml);
             $('.dialogOverlay').fadeIn(250, function() {
                 $('.dialog').fadeIn(150);
