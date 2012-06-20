@@ -9,7 +9,7 @@ if(!root) {
 }
 if (!fbi) { var fbi = {}; }
 
-(function(root, $) {
+(function(root, fbi, $) {
     "use strict";
     root.util = {
         makeAjaxRequest : function makeAjaxRequest (url, data, requestType) {
@@ -29,11 +29,10 @@ if (!fbi) { var fbi = {}; }
     
     root.project = {};
     
-})(root, jQuery);
-
-(function(root, $) {
+}(root, fbi, jQuery));
+(function (root, fbi, Mustache, $) {
     "use strict";
-
+    //var document;
     var controller = {
         create: function create(e) {
             var data = {
@@ -102,11 +101,11 @@ if (!fbi) { var fbi = {}; }
             });
         },
         showDialog: function dialogManager(outputHtml) {
-            if ($('.dialog')) {
-                console.log('.dialog window FOUND!');
-            } else {
-                console.log('.dialog window not found');
-            }
+//            if ($('.dialog')) {
+//                console.log('.dialog window FOUND!');
+//            } else {
+//                console.log('.dialog window not found');
+//            }
             $('.dialog').html(outputHtml);
             $('.dialogOverlay').fadeIn(250, function() {
                 $('.dialog').fadeIn(150);
@@ -194,7 +193,7 @@ if (!fbi) { var fbi = {}; }
         });
 
         // Bus Responders
-        // Handle Internal events
+        // Handle internal events that are not UI events
         fbi.bus.once("project.documentReady", controller.loadInitialProjectData);
         fbi.bus.on("project.action", function(options) {
             root.util.makeAjaxRequest(options.url || "", options.data || { }, options.verb || "POST");
@@ -211,4 +210,4 @@ if (!fbi) { var fbi = {}; }
         root.controllers = { };
     }
     root.controllers.main = controller;
-}(root, jQuery));
+}(root, fbi, Mustache, jQuery));
