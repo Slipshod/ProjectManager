@@ -28,10 +28,75 @@ if (!fbi) { var fbi = {}; }
     };
     
     root.project = {
-        //TODO: should project utilities, ie, Actions, etc go here?
+        create: function create (){
+            var data = {
+                Title: $('#Title').val(),
+                Detail: $('#Detail').val(),
+                //Created: new Date(),
+                Completed: $('#Completed').is(':checked')                
+            };
+            if (data.Title) {
+                fbi.bus.emit("project.action", {
+                    url: "/Project/Create",
+                    data: data,
+                    verb: "POST",
+                    success: function() {
+                        fbi.bus.emit("dialog.isFinished");
+                    }
+                });
+
+            } else {
+                console.log('Title was empty');
+            }
+     },
+        remove: function remove () {
+            var data = {
+                ProjectID: $('#ProjectID').val()
+            };
+            fbi.bus.emit('project.action', {
+                url: "/Project/Delete",
+                data: data,
+                verb: "POST",
+                success: function() {
+                    fbi.bus.emit("dialog.isFinished");
+                }
+            });
+        },
+        edit: function edit () {
+            var data = {
+                Title: $('#Title').val(),
+                Detail: $('#Detail').val(),
+                Completed: $('#Completed').is(':checked'),
+                ProjectID: $('#ProjectID').val()
+            };
+
+            if (data.Title) {
+                fbi.bus.emit('project.action', {
+                    url: "/Project/Edit",
+                    data: data,
+                    verb: "POST"
+                });
+            } else {
+                console.log('Title was empty');
+            }
+            fbi.bus.emit("dialog.finish");
+        }
+    };
+
+    root.subtask = {
+        create: function create (){
+            //TODO Add logic
+        },
+        remove: function remove () {
+            //TODO Add logic
+        },
+        edit: function edit () {
+            //TODO: Add logic
+        }
     };
     
 }(root, fbi, jQuery));
+
 (function (root, fbi, Mustache, $) {
     "use strict";
     //var document;
@@ -136,7 +201,6 @@ if (!fbi) { var fbi = {}; }
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
                 Completed: $('#Completed').is(':checked'),
-                //Created: $("#Created").val(),
                 ProjectID: $('#ProjectID').val()
             };
 
@@ -153,9 +217,6 @@ if (!fbi) { var fbi = {}; }
 
         },
         refreshProjectList: function refreshProjectList(e) {
-            //BUG: this currently depends on the project list templates being on the page.
-            //projectList templates will be changed to something besides a table soon.
-            // need to make them more manageable.
             $.getJSON('/Project/GetProjectsJson', null, function(data) {
                 var listTemplate = $('#projectListTemplate').html();
                 var outputHtml = Mustache.to_html(listTemplate, data);
@@ -163,11 +224,6 @@ if (!fbi) { var fbi = {}; }
             });
         },
         showDialog: function dialogManager(outputHtml) {
-//            if ($('.dialog')) {
-//                console.log('.dialog window FOUND!');
-//            } else {
-//                console.log('.dialog window not found');
-//            }
             $('.dialog').html(outputHtml);
             $('.dialogOverlay').fadeIn(250, function() {
                 $('.dialog').fadeIn(150);
@@ -197,9 +253,36 @@ if (!fbi) { var fbi = {}; }
         loadInitialProjectData: function loadInitialProjectData() {
             controller.refreshProjectList();
         }
-
     }; // END var controller
+    var dialogHandler = {
+        show: function showDialog(outputHtml) {
+            $('.dialog').html(outputHtml);
+            $('.dialogOverlay').fadeIn(250, function() {
+                $('.dialog').fadeIn(150);
+            });
+        },
+        hide: function hide(event) {
 
+            //BUG: Does not always get rid of the overlay correctly.  Doesn't select the overlay 
+            //NOTE: Currently this is only used when clicking the Close button on the dialog window.    
+            var element = $(event.currentTarget);
+            var dialog = element.parents('.dialog');
+            var overlay = $(".dialogOverlay");
+
+            dialog.fadeOut(250, function() {
+                overlay.fadeOut(250, function() {
+//                              dialog.delete();
+//                              overlay.delete();            
+                });
+            });
+
+        },
+        hideDialogAndRefresh: function hideDialogAndRefresh() {
+            $('.dialog').hide();
+            $('.dialogOverlay').hide();
+            controller.refreshProjectList();
+        }        
+    };
     $(document).ready(function docReady() {
         // Bus Responders
         // Handle internal events that are not UI events        
@@ -208,7 +291,7 @@ if (!fbi) { var fbi = {}; }
         fbi.bus.on("project.action", function(options) {
             root.util.makeAjaxRequest(options.url || "", options.data || { }, options.verb || "POST");
         });
-        fbi.bus.on("dialog.isFinished", controller.hideDialogAndRefresh);
+        fbi.bus.on("dialog.isFinished", dialogHandler.hideDialogAndRefresh);
         // END Bus Responders
 
         fbi.bus.emit("project.getAllProjectsOnInitialPageLoad");

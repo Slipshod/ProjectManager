@@ -134,6 +134,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JavascriptController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
+    <Compile Include="Controllers\SubTaskController.cs" />
     <Compile Include="DataManager\DropCreateDatabaseTables.cs" />
     <Compile Include="DataManager\ProjectManagerDbContext.cs" />
     <Compile Include="DataManager\ProjectManagerInitializer.cs" />

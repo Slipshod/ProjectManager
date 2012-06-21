@@ -95,7 +95,8 @@ body {
 }
 .projectListTable tr td { padding: .1em .25em .1em .25em;}
 .projectListTable .actionsColumn {
-    width: 115px;
+    width: 120px;
+    min-width: 120px;
     text-align: center;
 }
 .projectListTable .titleColumn{ width: 40em;}

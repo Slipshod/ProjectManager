@@ -19,28 +19,16 @@ namespace ProjectManager.Controllers
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
 
-        //
-        // GET: /Project/
-
         public ActionResult Index()
         {
             return View();
         }
-
-        //
-        // GET: /Project/Create
 
         public JsonResult Create()
         {
             var project = new Project();
             return Json(project, JsonRequestBehavior.AllowGet);
         }
-
-     
-
-
-        //
-        // POST: /Project/Create
 
         [HttpPost]
         public ActionResult Create(ProjectModel model)
@@ -61,17 +49,10 @@ namespace ProjectManager.Controllers
                                 Success = false
                             });
         }
-
-        //
-        // GET: /Project/Edit/5
-
         public ActionResult Edit(ProjectModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
-
-        //
-        // POST: /Project/Edit/5
 
         [HttpPost, ActionName("Edit")]
         public ActionResult ConfirmEdit(Project model)
@@ -85,16 +66,11 @@ namespace ProjectManager.Controllers
             return Json(new { Success = true });
         }
 
-        //
-        // GET: /Project/Delete/5
 
         public ActionResult Delete(ProjectModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
-
-        //
-        // POST: /Project/Delete/5
 
         [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(ProjectModel model)

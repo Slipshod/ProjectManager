@@ -28,67 +28,67 @@ namespace ProjectManager.DataManager
                                           Completed = false,
                                           Description = "Get the breakable toy working",
                                           Title = "It's Alive!",
-                                          ProjectId = 1
+                                          ProjectID = 1
                                       },
                                   new SubTask
                                       {
                                           Completed = true,
                                           Description = "Get the breakable toy working",
                                           Title = "Bring me a shrubbery!",
-                                          ProjectId = 1
+                                          ProjectID = 1
                                       },
                                   new SubTask
                                       {
                                           Completed = true,
                                           Description = "Get the WebParts toy working",
                                           Title = "YOU shall not pass!",
-                                          ProjectId = 2
+                                          ProjectID = 2
                                       },
                                   new SubTask
                                       {
                                           Completed = false,
                                           Description = "Get the WebParts toy working",
                                           Title = "You can't just Telnet into Mordor",
-                                          ProjectId = 2
+                                          ProjectID = 2
                                       },
                                   new SubTask
                                       {
                                           Completed = true,
                                           Description = "Get partial views working",
                                           Title = "There once one a man from Nantucket",
-                                          ProjectId = 3                                      },
+                                          ProjectID = 3                                      },
                                   new SubTask
                                       {
                                           Completed = true,
                                           Description = "Get partial views working",
                                           Title = "Curse your sudden but inevitable betrayal!",
-                                          ProjectId = 3
+                                          ProjectID = 3
                                       },
                                   new SubTask
                                       {
                                           Completed = false,
                                           Description = "Get the breakable toy working",
                                           Title = "Cheetos",
-                                          ProjectId = 4
+                                          ProjectID = 4
                                       },
                                   new SubTask
                                       {
                                           Completed = false,
                                           Description = "Get the breakable toy working",
                                           Title = "Snickers",
-                                          ProjectId = 4                                      },
+                                          ProjectID = 4                                      },
                                   new SubTask
                                       {
                                           Completed = true,
                                           Description = "some more default entries",
                                           Title = "Delete the default entries",
-                                          ProjectId = 5                                      },
+                                          ProjectID = 5                                      },
                                   new SubTask
                                       {
                                           Completed = false,
                                           Description = "These are defaults entries",
                                           Title = "They're everywhere",
-                                          ProjectId = 5
+                                          ProjectID = 5
                                       }
                               };
 
