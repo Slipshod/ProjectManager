@@ -47,6 +47,7 @@ if (!fbi) { var fbi = {}; }
             var data = {
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
+                Created: new Date(),
                 Completed: $('#Completed').is(':checked')
             };
             var outputHtml = Mustache.to_html(template, data);
@@ -97,6 +98,7 @@ if (!fbi) { var fbi = {}; }
             var data = {
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
+                Created: new Date(),
                 Completed: $('#Completed').is(':checked')                
             };
             if (data.Title) {
@@ -134,6 +136,7 @@ if (!fbi) { var fbi = {}; }
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
                 Completed: $('#Completed').is(':checked'),
+                //Created: $("#Created").val(),
                 ProjectID: $('#ProjectID').val()
             };
 

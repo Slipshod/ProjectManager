@@ -13,6 +13,8 @@ namespace ProjectManager.Maps
         {
             AutoMapper.Mapper.CreateMap<Project, ProjectModel>();
             AutoMapper.Mapper.CreateMap<ProjectModel, Project>();
+            AutoMapper.Mapper.CreateMap<SubTask, SubTaskViewModel>();
+            AutoMapper.Mapper.CreateMap<SubTaskViewModel, SubTask>();
         }
     }
 }

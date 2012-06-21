@@ -30,10 +30,10 @@ namespace ProjectManager.Controllers
         //
         // GET: /Project/Create
 
-        public ActionResult Create()
+        public JsonResult Create()
         {
             var project = new Project();
-            return View(project);
+            return Json(project, JsonRequestBehavior.AllowGet);
         }
 
      
@@ -67,7 +67,6 @@ namespace ProjectManager.Controllers
 
         public ActionResult Edit(ProjectModel model)
         {
-
             return GetProjectJson(model.ProjectID);
         }
 

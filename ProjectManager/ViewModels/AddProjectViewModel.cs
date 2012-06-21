@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using ProjectManager.Models;
 
 namespace ProjectManager.ViewModels
 {
@@ -10,5 +11,6 @@ namespace ProjectManager.ViewModels
         public string Title { get; set; }
         public string Detail { get; set; }
         public bool Completed { get; set; }
+        public DateTime Created { get; set; }
     }
 }

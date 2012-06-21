@@ -29,7 +29,7 @@
 <script type="text/template" id="createProject">
 <div  id='createForm' >
     <a href="#" class="butCloseDialog">&times;</a>
-    <h3>This is the Mustache Template</h3>
+    <h3>Create a new Project</h3>
     <div id="createForm">
         <div class="editor-label"> <label for="Title">Short Description</label> </div>
         <div class="editor-field">
@@ -39,6 +39,11 @@
         <div class="editor-field">
             <input class="text-box single-line" id="Detail" name="Detail" type="text" value="" />
         </div>
+        <div class="editor-label"> <label for="Created">Created</label> </div>
+        <div class="editor-field">
+            <input class="text-box single-line" id="Created" name="Created" type="text" value="{{Created}}" />
+        </div>
+
         <div class="editor-label">
             <label for="Completed">Completed</label> 
         </div>
@@ -66,6 +71,10 @@
         <div class="editor-label"> <label for="Detail">Detail</label> </div>
         <div class="editor-field">
             <input class="text-box single-line" id="Detail" name="Detail" type="text" value="{{Detail}}" />
+        </div>
+                <div class="editor-label"> <label for="Created">Created</label> </div>
+        <div class="editor-field">
+            <input class="text-box single-line" id="Created" name="Created" type="text" value="{{Created}}" />
         </div>
         <div class="editor-label">
             <label for="Completed">Completed</label> 

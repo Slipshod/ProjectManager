@@ -147,6 +147,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AddProjectViewModel.cs" />
     <Compile Include="ViewModels\ProjectModel.cs" />
+    <Compile Include="ViewModels\SubTaskViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ProjectManager.sdf">

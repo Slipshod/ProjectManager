@@ -14,6 +14,7 @@ namespace ProjectManager.Models
         public string Title { get; set; }
         public string Detail { get; set; }
         public bool Completed { get; set; }
+        public DateTime Created { get; set; }
         public ICollection<SubTask> SubTasks { get; set; } 
 
     }
