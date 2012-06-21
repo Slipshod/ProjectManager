@@ -14,6 +14,11 @@ namespace ProjectManager.Controllers
     public class SubTaskController : Controller
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
+        public ActionResult SubTaskList()
+        {
+            var subTasks = _db.SubTasks.ToList();
+            return View(subTasks);
+        }
 
         public ActionResult GetSubTasks( int? projectId)
         {
@@ -28,5 +33,39 @@ namespace ProjectManager.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult Create(SubTaskViewModel subTask)
+        {
+
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Delete(SubTaskViewModel model)
+        {
+            //var subTask = Mapper.Map<SubTaskViewModel, Project>(model);
+            var subTask = _db.SubTasks.Find(model.SubTaskId);
+            if (!ModelState.IsValid || subTask == null)
+            {
+                return Json(new {Success = false}, JsonRequestBehavior.AllowGet);
+            }
+
+            _db.SubTasks.Remove(subTask);
+            _db.SaveChanges();
+            Redirect("/SubTask/SubTaskList");
+            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
+        }
+
+        private ActionResult GetSubTaskJson(int subTaskId)
+        {
+            var subtask = _db.SubTasks.Find(subTaskId);
+            return Json(subtask, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Edit(SubTaskViewModel subTask)
+        {
+            throw new NotImplementedException();
+        }
+
+
     } // END class SubTaskController : Controller
 } // END namespace ProjectManager.Controllers

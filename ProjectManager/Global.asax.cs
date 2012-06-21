@@ -51,6 +51,7 @@ namespace ProjectManager
             BundleTable.Bundles.RegisterTemplateBundles();
 
             ProjectMap.Init();
+            SubTaskMap.Init();
         }
     }
 }

@@ -31,11 +31,11 @@ namespace ProjectManager.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(ProjectModel model)
+        public ActionResult Create(ProjectViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var project = Mapper.Map<ProjectModel, Project>(model);
+                var project = Mapper.Map<ProjectViewModel, Project>(model);
                 _db.Projects.Add(project);
                 _db.SaveChanges();
                 return Json(new
@@ -49,7 +49,7 @@ namespace ProjectManager.Controllers
                                 Success = false
                             });
         }
-        public ActionResult Edit(ProjectModel model)
+        public ActionResult Edit(ProjectViewModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
@@ -67,18 +67,17 @@ namespace ProjectManager.Controllers
         }
 
 
-        public ActionResult Delete(ProjectModel model)
+        public ActionResult Delete(ProjectViewModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult ConfirmDelete(ProjectModel model)
+        public ActionResult ConfirmDelete(ProjectViewModel model)
         {
             var project = _db.Projects.Find(model.ProjectID);
             if (ModelState.IsValid)
             {
-                //var project = Mapper.Map<ProjectModel, Project>(model);
                 _db.Projects.Remove(project);
                 _db.SaveChanges();
             }

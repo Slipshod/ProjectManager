@@ -7,10 +7,9 @@ namespace ProjectManager.Maps
     {
         public static void Init()
         {
-            AutoMapper.Mapper.CreateMap<Project, ProjectModel>();
-            AutoMapper.Mapper.CreateMap<ProjectModel, Project>();
-            AutoMapper.Mapper.CreateMap<SubTask, SubTaskViewModel>();
-            AutoMapper.Mapper.CreateMap<SubTaskViewModel, SubTask>();
+            AutoMapper.Mapper.CreateMap<Project, ProjectViewModel>();
+            AutoMapper.Mapper.CreateMap<ProjectViewModel, Project>();
+
         }
     }
 }
