@@ -15,7 +15,5 @@ namespace ProjectManager.Models
         public string Detail { get; set; }
         public bool Completed { get; set; }
         public IEnumerable<SubTask> SubTasks { get; set; }
-        public string Temp { get; set; }
-
     }
 }
