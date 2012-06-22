@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using System.Web.Helpers;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using AutoMapper;
 using ProjectManager.Models;
 using ProjectManager.DataManager;
-using System.Json;
 using ProjectManager.ViewModels;
 
 namespace ProjectManager.Controllers

@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using ProjectManager.Models;
 using AutoMapper;
+using ProjectManager.Models;
 using ProjectManager.DataManager;
-using System.Json;
 using ProjectManager.ViewModels;
 
 namespace ProjectManager.Controllers
@@ -20,7 +19,7 @@ namespace ProjectManager.Controllers
             return View(subTasks);
         }
 
-        public ActionResult GetSubTasks( int? projectId)
+        public ActionResult GetSubTasks(int? projectId)
         {
             var subTasks = _db.SubTasks.ToList();
 
@@ -34,27 +33,35 @@ namespace ProjectManager.Controllers
 
         }
 
-        public ActionResult Create(SubTaskViewModel subTask)
+        [HttpPost] // Post
+        public ActionResult Create(SubTaskViewModel model)
         {
-
-            throw new NotImplementedException();
+            if (ModelState.IsValid)
+            {
+                var subtask = Mapper.Map<SubTaskViewModel, SubTask>(model);
+                _db.SubTasks.Add(subtask);
+                _db.SaveChanges();
+                return Json(new {Success = true});
+            }
+            return Json(new {Success = false});
         }
 
+
+        [HttpPost, ActionName("Delete")]
         public ActionResult Delete(SubTaskViewModel model)
         {
-            //var subTask = Mapper.Map<SubTaskViewModel, Project>(model);
-            var subTask = _db.SubTasks.Find(model.SubTaskId);
-            if (!ModelState.IsValid || subTask == null)
+            if(ModelState.IsValid)
             {
-                return Json(new {Success = false}, JsonRequestBehavior.AllowGet);
+                var subtask = _db.SubTasks.Find(model.SubTaskId);
+                _db.SubTasks.Remove(subtask);
+                _db.SaveChanges();
+                return Json(new {Success = true});
             }
+             
 
-            _db.SubTasks.Remove(subTask);
-            _db.SaveChanges();
-            Redirect("/SubTask/SubTaskList");
-            return Json(new {Success = true}, JsonRequestBehavior.AllowGet);
+            return Json(new {Success = false});
         }
-
+        
         private ActionResult GetSubTaskJson(int subTaskId)
         {
             var subtask = _db.SubTasks.Find(subTaskId);
