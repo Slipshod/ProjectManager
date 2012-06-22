@@ -1,10 +1,13 @@
-﻿@model IEnumerable<ProjectManager.Models.SubTask>
+﻿@model IEnumerable<ProjectManager.ViewModels.SubTaskViewModel>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table>
     <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SubTaskId)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
@@ -22,6 +25,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubTaskId)
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>

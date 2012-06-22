@@ -48,8 +48,8 @@ namespace ProjectManager
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            BundleTable.Bundles.RegisterTemplateBundles();
-
+            //BundleTable.Bundles.RegisterTemplateBundles();
+            BundleTable.Bundles.EnableDefaultBundles();
             ProjectMap.Init();
             SubTaskMap.Init();
         }

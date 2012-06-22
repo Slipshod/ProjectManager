@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,11 +13,6 @@ namespace ProjectManager.Controllers
     public class ProjectController : Controller
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public JsonResult Create()
         {
@@ -60,13 +56,12 @@ namespace ProjectManager.Controllers
             return Json(new { Success = true });
         }
 
-
         public ActionResult Delete(ProjectViewModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
 
-        [HttpPost, ActionName("Delete")]
+       [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(ProjectViewModel model)
         {
             var project = _db.Projects.Find(model.ProjectID);
@@ -96,9 +91,26 @@ namespace ProjectManager.Controllers
             return PartialView(projects);
         }
 
-        private ICollection<Project> GetProjects()
+        private JsonResult GetProjects()
         {
-            return (_db.Projects.ToList());
+
+            // Get the records
+            // Get all subtasks per record
+            // Populate each project.SubTasks
+            // return the projects list as Json
+            var projects = _db.Projects.ToList();
+            var allSubtasks = _db.SubTasks.ToList();
+
+            foreach (var project in projects)
+            {
+                
+                //allSubtasks.SelectMany(st => st.ProjectID == project.ProjectID);
+                }
+
+
+
+
+            return Json(projects, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetProjectsJson(bool asJson = true)

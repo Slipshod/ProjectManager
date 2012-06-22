@@ -6,7 +6,7 @@ namespace ProjectManager.DataManager
     {
         public void InitializeDatabase(ProjectManagerDbContext context)
         {
-            bool dbExists;
+            
         }
     }
 }

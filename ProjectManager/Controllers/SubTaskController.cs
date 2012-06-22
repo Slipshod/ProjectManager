@@ -13,24 +13,26 @@ namespace ProjectManager.Controllers
     public class SubTaskController : Controller
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
-        public ActionResult SubTaskList()
+
+        public IList<SubTaskViewModel> SubTaskList()
         {
-            var subTasks = _db.SubTasks.ToList();
-            return View(subTasks);
+            var subtasks = _db.SubTasks.AsEnumerable();
+
+            var result = subtasks.Select(Mapper.Map<SubTask, SubTaskViewModel>).ToList();
+            return result;
         }
 
-        public ActionResult GetSubTasks(int? projectId)
+        public ActionResult GetSubTasks(ProjectViewModel project = null)
         {
             var subTasks = _db.SubTasks.ToList();
 
-            if (projectId == null)
+            if (project == null)
             {
                 return Json(subTasks, JsonRequestBehavior.AllowGet);
             }
-            var result = subTasks.Where(st => st.ProjectID == projectId);
+            var result = subTasks.Where(st => st.SubTaskId == project.ProjectID);
           
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
 
         [HttpPost] // Post
