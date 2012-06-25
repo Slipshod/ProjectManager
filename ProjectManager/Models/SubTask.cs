@@ -12,5 +12,6 @@ namespace ProjectManager.Models
         public string Description { get; set; }
         public bool Completed { get; set; }
         public int ProjectID { get; set; }
+        public int tempt { get; set; }
     }
 }
