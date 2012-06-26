@@ -26,14 +26,5 @@ namespace ProjectManager.Controllers
             return View();
         }
 
-        public ActionResult Tasklist()
-        {
-            return View();
-        }
-
-        public ActionResult JsSelector()
-        {
-            return View();
-        }
     }
 }

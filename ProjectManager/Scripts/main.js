@@ -10,96 +10,138 @@ if(!root) {
 if (!fbi) { var fbi = {}; }
 
 (function(root, fbi, $) {
-    "use strict";
-    root.util = {
-        makeAjaxRequest : function makeAjaxRequest (url, data, requestType) {
-            if (!requestType) {
-                requestType = "POST";
-            }
-            $.ajax({
-                type: requestType,
-                url: url,
-                data: data,
-                success: function () {
-                    fbi.bus.emit('dialog.isFinished');
-                }
-            });
-        }
-    };
-    
-    root.project = {
-    	subTasks: [],
-    	
-        create: function createProject (){
-            var data = {
-                Title: $('#Title').val(),
-                Detail: $('#Detail').val(),
-                //Created: new Date(),
-                Completed: $('#Completed').is(':checked')                
-            };
-            if (data.Title) {
-                fbi.bus.emit("project.action", {
-                    url: "/Project/Create",
-                    data: data,
-                    verb: "POST",
-                    success: function() {
-                        fbi.bus.emit("dialog.isFinished");
-                    }
-                });
+	"use strict";
+	root.util = {
+		makeAjaxRequest: function makeAjaxRequest(url, data, requestType) {
+			if (!requestType) {
+				requestType = "POST";
+			}
+			$.ajax({
+				type: requestType,
+				url: url,
+				data: data,
+				success: function() {
+					fbi.bus.emit('dialog.isFinished');
+				}
+			});
+		}
+	};
 
-            } else {
-                console.log('Title was empty');
-            }
-     },
-        remove: function removeProject () {
-            var data = {
-                ProjectID: $('#ProjectID').val()
-            };
-            fbi.bus.emit('project.action', {
-                url: "/Project/Delete",
-                data: data,
-                verb: "POST",
-                success: function() {
-                    fbi.bus.emit("dialog.isFinished");
-                }
-            });
-        },
-        edit: function editProject () {
-            var data = {
-                Title: $('#Title').val(),
-                Detail: $('#Detail').val(),
-                Completed: $('#Completed').is(':checked'),
-                ProjectID: $('#ProjectID').val()
-            };
+	root.project = {
+		subTasks: [],
 
-            if (data.Title) {
-                fbi.bus.emit('project.action', {
-                    url: "/Project/Edit",
-                    data: data,
-                    verb: "POST"
-                });
-            } else {
-                console.log('Title was empty');
-            }
-            fbi.bus.emit("dialog.finish");
-        },
-    	getSubTasks: function getSubTasks(id) {
-    		root.util.makeAjaxRequest("/SubTask/GetSubtasks", id, "GET");
-    	}
-    };
+		create: function createProject() {
+			var data = {
+				Title: $('#Title').val(),
+				Detail: $('#Detail').val(),
+				//Created: new Date(),
+				Completed: $('#Completed').is(':checked')
+			};
+			if (data.Title) {
+				fbi.bus.emit("project.action", {
+					url: "/Project/Create",
+					data: data,
+					verb: "POST",
+					success: function() {
+						fbi.bus.emit("dialog.isFinished");
+					}
+				});
 
-    root.subtask = {
-        create: function createSubTask (){
-            //TODO Add logic
-        },
-        remove: function removeSubTask () {
-            //TODO Add logic
-        },
-        edit: function editSubTask () {
-            //TODO: Add logic
-        }
-    };
-    
+			} else {
+				console.log('Title was empty');
+			}
+		},
+		remove: function removeProject() {
+			var data = {
+				ProjectID: $('#ProjectID').val()
+			};
+			fbi.bus.emit('project.action', {
+				url: "/Project/Delete",
+				data: data,
+				verb: "POST",
+				success: function() {
+					fbi.bus.emit("dialog.isFinished");
+				}
+			});
+		},
+		edit: function editProject() {
+			var data = {
+				Title: $('#Title').val(),
+				Detail: $('#Detail').val(),
+				Completed: $('#Completed').is(':checked'),
+				ProjectID: $('#ProjectID').val()
+			};
+
+			if (data.Title) {
+				fbi.bus.emit('project.action', {
+					url: "/Project/Edit",
+					data: data,
+					verb: "POST"
+				});
+			} else {
+				console.log('Title was empty');
+			}
+			fbi.bus.emit("dialog.finish");
+		}
+	};
+
+	root.subtask = {
+		create: function createSubTask() {
+			var data = {
+				Title: $('#Title').val(),
+				Detail: $('#Detail').val(),
+				//Created: new Date(),
+				Completed: $('#Completed').is(':checked'),
+				ProjectID: $('#ProjectID').val()
+			};
+			if (data.Title) {
+				fbi.bus.emit("project.action", {
+					url: "/SubTask/Create",
+					data: data,
+					verb: "POST",
+					success: function() {
+						fbi.bus.emit("dialog.isFinished");
+					}
+				});
+
+			} else {
+				console.log('Title was empty');
+			}
+		},
+		remove: function removeSubTask() {
+			var data = {
+				SubTaskId: $('#SubTaskId').val()
+			};
+			fbi.bus.emit('project.action', {
+				url: "/SubTask/Delete",
+				data: data,
+				verb: "POST",
+				success: function() {
+					fbi.bus.emit("dialog.isFinished");
+				}
+			});
+		},
+		edit: function editSubTask() {
+			var data = {
+				Title: $('#Title').val(),
+				Detail: $('#Detail').val(),
+				Completed: $('#Completed').is(':checked'),
+				SubTaskId: $('#ProjectID').val()
+			};
+
+			if (data.Title) {
+				fbi.bus.emit('project.action', {
+					url: "/SubTask/Edit",
+					data: data,
+					verb: "POST"
+				});
+			} else {
+				console.log('Title was empty');
+			}
+			fbi.bus.emit("dialog.finish");
+		}
+	};
+
 }(root, fbi, jQuery));
 
 (function (root, fbi, mustache, $) {

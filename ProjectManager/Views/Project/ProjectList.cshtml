@@ -27,7 +27,21 @@
         <a data-id="{{ProjectID}}" class="deleteLink">Delete</a>
     </td>
 </tr>
+    <tr colspan="5">
+        <div class="tasklist">
+            <table>
+            <tr><td>Fake fake fake</td></tr>
+                {{#Tasks}}
+                    <tr>    
+                        <td> {{Title}} </td>
+                        <td> {{Detail}} </td>
+                    </tr>
+                {{/tasks}}
+            </table>
+    </div>
+    </tr>
 {{/projects}}
+
 </script>
 
 

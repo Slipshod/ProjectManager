@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
@@ -12,11 +13,6 @@ namespace ProjectManager.Controllers
     public class ProjectController : Controller
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
-
-        public ActionResult Index()
-        {
-            return View();
-        }
 
         public JsonResult Create()
         {
@@ -60,13 +56,12 @@ namespace ProjectManager.Controllers
             return Json(new { Success = true });
         }
 
-
         public ActionResult Delete(ProjectViewModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
 
-        [HttpPost, ActionName("Delete")]
+       [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(ProjectViewModel model)
         {
             var project = _db.Projects.Find(model.ProjectID);
@@ -76,6 +71,8 @@ namespace ProjectManager.Controllers
                 _db.SaveChanges();
             }
             return Json(new {Success = true});
+
+           //Delete will also have to recursively delete all related subtask records since we don't want to rely on the database to do that.
         }
 
         public ActionResult ProjectEditorFields()
@@ -96,9 +93,24 @@ namespace ProjectManager.Controllers
             return PartialView(projects);
         }
 
-        private ICollection<Project> GetProjects()
+        private JsonResult GetProjects()
         {
-            return (_db.Projects.ToList());
+
+            // Get the records
+            // Get all subtasks per record
+            // Populate each project.SubTasks
+            // return the projects list as Json
+
+            var proj = (from p in _db.Projects
+                        select new
+                                   {
+                                       Project = p,
+                                       Tasks = _db.SubTasks.Where(t => t.ProjectID == p.ProjectID)
+                                   }).ToList();
+
+            _db.Configuration.LazyLoadingEnabled = true;
+
+            return Json(proj, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetProjectsJson(bool asJson = true)
