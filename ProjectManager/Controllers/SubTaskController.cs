@@ -14,11 +14,11 @@ namespace ProjectManager.Controllers
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
 
+
         public ActionResult GetSubtasksByProjectId(int id = -1)
         {
             var subtasks = _db.SubTasks.ToList();
             var results = subtasks.Where(st => st.ProjectID == id);
-
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
@@ -29,8 +29,7 @@ namespace ProjectManager.Controllers
                 var subTask = _db.SubTasks.Find(id);
                 return subTask == null ? (Json(new { Success = false }, JsonRequestBehavior.AllowGet)) : (Json(subTask, JsonRequestBehavior.AllowGet));
             }
-
-
+            
             var subtasks = _db.SubTasks.ToList();
             return Json(subtasks, JsonRequestBehavior.AllowGet);
         }

@@ -93,25 +93,40 @@ namespace ProjectManager.Controllers
             return PartialView(projects);
         }
 
-        private IList<Project>GetProjects()
+
+        private IList<Project> GetProjects()
         {
             var projects = _db.Projects.ToList();
+            
+
 
             return projects;
         }
 
-        public ActionResult GetProjectsJson(bool asJson = true)
+
+        public ActionResult GetProjectsJson()
         {
             var projectList = new {projects = GetProjects()};
-
-           return Json(projectList, JsonRequestBehavior.AllowGet);
+            return Json(projectList, JsonRequestBehavior.AllowGet);
             
         }
 
-        public ActionResult GetProjectJson(int id = 0)
+        public ActionResult GetProjectJson(int id)
         {
+            
             var project = _db.Projects.Find(id);
+            project.SubTasks = _db.SubTasks.Where(st => st.ProjectID == project.ProjectID);
+
             return Json(project, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult ProjectListJson()
+        {
+            var projectList = new { projects = _db.Projects.ToList() };
+
+
+            return Json(projectList, JsonRequestBehavior.AllowGet);
+            
         }
     }
 }
