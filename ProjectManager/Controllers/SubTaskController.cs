@@ -14,33 +14,12 @@ namespace ProjectManager.Controllers
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
 
-
-        public ActionResult GetSubtasksByProjectId(int id = -1)
-        {
-            throw new NotImplementedException();
-        }
-
         public IList<SubTaskViewModel> SubTaskList()
         {
             var subtasks = _db.SubTasks.AsEnumerable();
 
             var result = subtasks.Select(Mapper.Map<SubTask, SubTaskViewModel>).ToList();
-<<<<<<< HEAD
             return result; 
-        }
-
-
-        public JsonResult GetSubTasks()
-        {
-            var subTasks = new {subtasks = SubTaskList()};
-
-           
-         
-            return Json(subTasks, JsonRequestBehavior.AllowGet);
-        }
- 
-=======
-            return result;
         }
 
         public ActionResult GetSubTasks(ProjectViewModel project = null)
@@ -69,6 +48,5 @@ namespace ProjectManager.Controllers
             return Json(subtasks, JsonRequestBehavior.AllowGet);
         }
 
->>>>>>> f4dd2f40940616ab3735bb19f4b8188bfe162273
     } // END class SubTaskController : Controller
 } // END namespace ProjectManager.Controllers

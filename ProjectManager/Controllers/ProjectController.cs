@@ -94,25 +94,11 @@ namespace ProjectManager.Controllers
         }
 
 
-<<<<<<< HEAD
-            var proj = (from p in _db.Projects
-                        select new
-                                   {
-                                       Project = p,
-                                       SubTasks = _db.SubTasks.Where(t => t.ProjectID == p.ProjectID)
-                                   }).ToList();
-=======
->>>>>>> f4dd2f40940616ab3735bb19f4b8188bfe162273
 
         private IList<Project> GetProjects()
         {
             var projects = _db.Projects.ToList();
-<<<<<<< HEAD
-
-            return Json(proj, JsonRequestBehavior.AllowGet);
-=======
             return projects;
->>>>>>> f4dd2f40940616ab3735bb19f4b8188bfe162273
         }
 
 //        private JsonResult GetProjects()
