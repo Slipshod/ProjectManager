@@ -105,23 +105,13 @@ namespace ProjectManager.Controllers
                         select new
                                    {
                                        Project = p,
-                                       Tasks = _db.SubTasks.Where(t => t.ProjectID == p.ProjectID)
+                                       SubTasks = _db.SubTasks.Where(t => t.ProjectID == p.ProjectID)
                                    }).ToList();
 
             _db.Configuration.LazyLoadingEnabled = true;
             var projects = _db.Projects.ToList();
 
-            var allSubtasks = _db.SubTasks.ToList();
-
-            foreach (var project in projects)
-            {
-                project.SubTasks = _db.SubTasks.Where(t => t.ProjectID == project.ProjectID);
-            }
-
-
-
-
-            return Json(projects, JsonRequestBehavior.AllowGet);
+            return Json(proj, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetProjectsJson(bool asJson = true)
