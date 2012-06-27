@@ -94,14 +94,44 @@ namespace ProjectManager.Controllers
         }
 
 
+
         private IList<Project> GetProjects()
         {
             var projects = _db.Projects.ToList();
-            
-
-
             return projects;
         }
+
+//        private JsonResult GetProjects()
+//        {
+//
+//            // Get the records
+//            // Get all subtasks per record
+//            // Populate each project.SubTasks
+//            // return the projects list as Json
+//
+//            var proj = (from p in _db.Projects
+//                        select new
+//                                   {
+//                                       Project = p,
+//                                       Tasks = _db.SubTasks.Where(t => t.ProjectID == p.ProjectID)
+//                                   }).ToList();
+//
+//            _db.Configuration.LazyLoadingEnabled = true;
+//            var projects = _db.Projects.ToList();
+//
+//            var allSubtasks = _db.SubTasks.ToList();
+//
+//            foreach (var project in projects)
+//            {
+//                project.SubTasks = _db.SubTasks.Where(t => t.ProjectID == project.ProjectID);
+//            }
+//
+//
+//
+//
+//            return Json(projects, JsonRequestBehavior.AllowGet);
+//
+//        }
 
 
         public ActionResult GetProjectsJson()
