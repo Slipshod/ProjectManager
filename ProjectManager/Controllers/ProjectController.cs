@@ -93,24 +93,11 @@ namespace ProjectManager.Controllers
             return PartialView(projects);
         }
 
-        private JsonResult GetProjects()
+        private IList<Project>GetProjects()
         {
+            var projects = _db.Projects.ToList();
 
-            // Get the records
-            // Get all subtasks per record
-            // Populate each project.SubTasks
-            // return the projects list as Json
-
-            var proj = (from p in _db.Projects
-                        select new
-                                   {
-                                       Project = p,
-                                       Tasks = _db.SubTasks.Where(t => t.ProjectID == p.ProjectID)
-                                   }).ToList();
-
-            _db.Configuration.LazyLoadingEnabled = true;
-
-            return Json(proj, JsonRequestBehavior.AllowGet);
+            return projects;
         }
 
         public ActionResult GetProjectsJson(bool asJson = true)

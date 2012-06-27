@@ -14,67 +14,26 @@ namespace ProjectManager.Controllers
     {
         private readonly ProjectManagerDbContext _db = new ProjectManagerDbContext();
 
-        public IList<SubTaskViewModel> SubTaskList()
+        public ActionResult GetSubtasksByProjectId(int id = -1)
         {
-            var subtasks = _db.SubTasks.AsEnumerable();
+            var subtasks = _db.SubTasks.ToList();
+            var results = subtasks.Where(st => st.ProjectID == id);
 
-            var result = subtasks.Select(Mapper.Map<SubTask, SubTaskViewModel>).ToList();
-            return result;
+            return Json(results, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetSubTasks(ProjectViewModel project = null)
+        public ActionResult GetSubtasksJson(int id = -1)
         {
-            var subTasks = _db.SubTasks.ToList();
-
-            if (project == null)
+            if (id >= 0)
             {
-                return Json(subTasks, JsonRequestBehavior.AllowGet);
+                var subTask = _db.SubTasks.Find(id);
+                return subTask == null ? (Json(new { Success = false }, JsonRequestBehavior.AllowGet)) : (Json(subTask, JsonRequestBehavior.AllowGet));
             }
-            var result = subTasks.Where(st => st.SubTaskId == project.ProjectID);
-          
-            return Json(result, JsonRequestBehavior.AllowGet);
+
+
+            var subtasks = _db.SubTasks.ToList();
+            return Json(subtasks, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpPost] // Post
-        public ActionResult Create(SubTaskViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var subtask = Mapper.Map<SubTaskViewModel, SubTask>(model);
-                _db.SubTasks.Add(subtask);
-                _db.SaveChanges();
-                return Json(new {Success = true});
-            }
-            return Json(new {Success = false});
-        }
-
-
-        [HttpPost, ActionName("Delete")]
-        public ActionResult Delete(SubTaskViewModel model)
-        {
-            if(ModelState.IsValid)
-            {
-                var subtask = _db.SubTasks.Find(model.SubTaskId);
-                _db.SubTasks.Remove(subtask);
-                _db.SaveChanges();
-                return Json(new {Success = true});
-            }
-             
-
-            return Json(new {Success = false});
-        }
-        
-        private ActionResult GetSubTaskJson(int subTaskId)
-        {
-            var subtask = _db.SubTasks.Find(subTaskId);
-            return Json(subtask, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult Edit(SubTaskViewModel subTask)
-        {
-            throw new NotImplementedException();
-        }
-
 
     } // END class SubTaskController : Controller
 } // END namespace ProjectManager.Controllers
