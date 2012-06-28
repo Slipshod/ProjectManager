@@ -143,6 +143,7 @@
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\SubTaskController.cs" />
     <Compile Include="DataManager\DropCreateDatabaseTables.cs" />
+    <Compile Include="DataManager\ModelExtensions.cs" />
     <Compile Include="DataManager\ProjectManagerDbContext.cs" />
     <Compile Include="DataManager\ProjectManagerInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -150,6 +151,7 @@
     </Compile>
     <Compile Include="Maps\ProjectMap.cs" />
     <Compile Include="Maps\SubTaskMap.cs" />
+    <Compile Include="Models\Savable.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\SubTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -258,6 +260,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SubTask\SubTaskList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\List.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -41,7 +41,9 @@ namespace ProjectManager.Controllers
             if (id >= 0)
             {
                 var subTask = _db.SubTasks.Find(id);
-                return subTask == null ? (Json(new { Success = false }, JsonRequestBehavior.AllowGet)) : (Json(subTask, JsonRequestBehavior.AllowGet));
+                return subTask == null
+                    ? (Json(new { Success = false }, JsonRequestBehavior.AllowGet))
+                    : (Json(subTask, JsonRequestBehavior.AllowGet));
             }
             
             var subtasks = _db.SubTasks.ToList();

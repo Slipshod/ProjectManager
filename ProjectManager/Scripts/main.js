@@ -34,7 +34,6 @@ if (!fbi) { var fbi = {}; }
 			var data = {
 				Title: $('#Title').val(),
 				Detail: $('#Detail').val(),
-				//Created: new Date(),
 				Completed: $('#Completed').is(':checked')
 			};
 			if (data.Title) {
@@ -51,9 +50,9 @@ if (!fbi) { var fbi = {}; }
 				console.log('Title was empty');
 			}
 		},
-		remove: function removeProject() {
+		remove: function removeProject(projectId) {
 			var data = {
-				ProjectID: $('#ProjectID').val()
+				ProjectID: projectId
 			};
 			fbi.bus.emit('project.action', {
 				url: "/Project/Delete",
@@ -90,7 +89,6 @@ if (!fbi) { var fbi = {}; }
 			var data = {
 				Title: $('#Title').val(),
 				Detail: $('#Detail').val(),
-				//Created: new Date(),
 				Completed: $('#Completed').is(':checked'),
 				ProjectID: $('#ProjectID').val()
 			};
@@ -162,8 +160,13 @@ if (!fbi) { var fbi = {}; }
         	controller.initializeClickHandlers();
 		},
        initializeClickHandlers: function initializeClickHandlers() {
-			//Click Event Listeners        	
-			$("#butDelete").live("click", root.project.remove);
+			//Click Event Listeners  
+       	    //TODO: Refactor button click event handlers to be managed in the bus
+       	
+			//$("#butDelete").live("click", root.project.remove);
+			$("#butDelete").live("click", function () { fbi.bus.emit('Delete.Project', $('#ProjectID').val()); });
+       	     
+       	    
 			$("#butCreate").live("click", root.project.create);
 			$("#butEdit").live("click", root.project.edit);
 			$("#linkNewProject").live("click", function() {
@@ -171,7 +174,6 @@ if (!fbi) { var fbi = {}; }
             var data = {
                 Title: $('#Title').val(),
                 Detail: $('#Detail').val(),
-                //Created: new Date(),
                 Completed: $('#Completed').is(':checked')
             };
             var outputHtml = Mustache.to_html(template, data);
@@ -197,7 +199,6 @@ if (!fbi) { var fbi = {}; }
 			$(".deleteLink").live("click", function() {
             var projectId = $(this).attr("data-id");
 
-            //Currently the Delete action is returning the correct item to delete as Json
             var data = {
                 ProjectID: projectId
             };
@@ -232,13 +233,16 @@ if (!fbi) { var fbi = {}; }
     }; // END var controller
     var initializeBus = function () {
         // Bus Responders
-        // Handle internal events that are not UI events        
+        // Handle internal events that are not UI events
+    	
         fbi.bus.once("project.initialize", controller.init());        
         fbi.bus.once("project.getAllProjectsOnInitialPageLoad", controller.loadInitialProjectData);
         fbi.bus.on("project.action", function(options) {
             root.util.makeAjaxRequest(options.url || "", options.data || { }, options.verb || "POST");
         });
         fbi.bus.on("dialog.isFinished", dialogHandler.hideAndRefresh);
+    	fbi.bus.on("Delete.Project", root.project.remove);
+
         // END Bus Responders
 
     };

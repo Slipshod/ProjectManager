@@ -5,13 +5,12 @@ using System.Text;
 
 namespace ProjectManager.Models
 {
-    public class SubTask
+    public class SubTask : ISavable
     {
         public int SubTaskId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public bool Completed { get; set; }
         public int ProjectID { get; set; }
-        public int tempt { get; set; }
     }
 }
