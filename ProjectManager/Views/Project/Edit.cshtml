@@ -1,13 +1,30 @@
-﻿@model ProjectManager.Models.Project
-<div id="ajaxForm" class="">
-    
-    @Html.HiddenFor(model => model.ProjectID)
+﻿<script type="text/template" id="editProject">
+<div class='form' id="editForm">
 
-    @Html.Partial("ProjectEditorFields")
-    
-    <input type="button" id="butEdit" value="Submit Edit"/>
-</div>
-<hr />
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+   <div> <span class="cancelButton" id="closeDialog">&times; Close</span></div>
+
+    <h3>This is the Edit Mustache dialog</h3>
+    <div id="editForm">
+    <input  id="ProjectID" name="ProjectID" type="hidden" value="{{ProjectID}}" />
+
+        <div class="editor-label"> <label for="Title">Short Description</label> </div>
+        <div class="editor-field">
+            <input class="text-box single-line" id="Title" name="Title" type="text" value="{{Title}}" /> 
+        </div>
+        <div class="editor-label"> <label for="Detail">Detail</label> </div>
+        <div class="editor-field">
+           <textarea id="Detail" rows="20" cols="50">{{Detail}}</textarea>
+        </div>
+
+        <div class="editor-label">
+            <label for="Completed">Completed</label> 
+        </div>
+        <div class="editor-field">
+            <input class="check-box" id="Completed" name="Completed" type="checkbox" value="{{Completed}}" />
+        </div>
+        <div class='link button' id="ComfirmProjectEdit">Comfirm Edit</div>
+        
+        
+    </div>    
+</div>    
+</script>

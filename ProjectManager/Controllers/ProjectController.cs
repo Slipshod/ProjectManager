@@ -88,10 +88,6 @@ namespace ProjectManager.Controllers
            //Delete will also have to recursively delete all related subtask records since we don't want to rely on the database to do that.
         }
 
-        public ActionResult ProjectEditorFields()
-        {
-            return View();
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -99,44 +95,38 @@ namespace ProjectManager.Controllers
             base.Dispose(disposing);
         }
 
-        [ChildActionOnly]
-        public ActionResult ProjectList()
-        {
-            var projects = GetProjects();
-            return PartialView(projects);
-        }
-        
+      
         private IList<Project> GetProjects()
-        {   
-            return _db.Projects.ToList();
-        }
-
-        public ActionResult GetProjectsJson()
         {
-            var projectList = new {projects = GetProjects()};
-            return Json(projectList, JsonRequestBehavior.AllowGet);
-            
-        }
-
-        public ActionResult GetProjectJson(int id) //might be named "DetailsJson"
-        {
-            
-            var project = _db.Projects.Find(id);
-            project.SubTasks = _db.SubTasks.Where(st => st.ProjectID == project.ProjectID);
-
-            return Json(project, JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult List()
-        {
-            var projects = GetProjects();
+            var projects = _db.Projects.ToList();
             foreach (var project in projects)
             {
                 var id = project.ProjectID;
                 project.SubTasks = _db.SubTasks.Where(t => t.ProjectID == id);
             }
 
-            return PartialView( Json(new {projects}, JsonRequestBehavior.AllowGet) );
+            return projects;
+        }
+
+        public ActionResult GetProjectsJson()
+        {
+            return Json(new { projects = GetProjects()}, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetProjectJson(int id) //might be named "DetailsJson"
+        {
+            var project = _db.Projects.Find(id);
+            project.SubTasks = _db.SubTasks.Where(st => st.ProjectID == project.ProjectID);
+
+            return Json(project, JsonRequestBehavior.AllowGet);
+        }
+
+        [ChildActionOnly]
+        public ActionResult List()
+        {
+//            var proj = GetProjects();
+//            var projectsJson = new {projects = proj};
+            return PartialView( );
         }
 
     }

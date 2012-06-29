@@ -17,6 +17,6 @@ namespace ProjectManager.Models
         public string Title { get; set; }
         public string Detail { get; set; }
         public bool Completed { get; set; }
-        public IEnumerable<SubTask> SubTasks { get; set; }
+        public virtual IEnumerable<SubTask> SubTasks { get; set; }
     }
 }

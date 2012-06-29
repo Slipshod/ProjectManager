@@ -1,22 +1,19 @@
-﻿@model ProjectManager.Models.Project
-
-@{
-    ViewBag.Title = "Delete";
-}
-
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-
-
-
-<div id="ajaxForm">
-    @Html.HiddenFor(model => model.ProjectID)
-    @Html.Partial("ProjectDisplayFields")
-    <p> <input type="button" id="butDelete" value="Confirm Delete" /> </p>
-</div>
-<hr />
-@Html.ActionLink("Back to List", "Index")
+﻿<script type="text/template" id="deleteProject">
+<div class="form" id="deleteForm">
+    <div><span class="cancelButton" id="closeDialog">&times; Close</span></div>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <input  id="ProjectID" name="ProjectID" type="hidden" value="{{ProjectID}}" />
+        <div class="display-label">
+            <label for="Title">Title</label>
+        </div>
+        <div class="display-field">
+            <input disabled="disabled" value="{{Title}}"/>
+        </div>
+        <div class='link button' id="ComfirmProjectRemove">Comfirm Delete</div>
+    </div>
+</div>  
+</script>
 
   
     

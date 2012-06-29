@@ -244,16 +244,7 @@
     <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Project\ProjectEditorFields.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Views\Shared\EditorTemplates\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Project\ProjectDisplayFields.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Project\ProjectList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Project\Edit.cshtml" />
@@ -263,6 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Project\List.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Project\Create.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

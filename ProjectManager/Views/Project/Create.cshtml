@@ -1,0 +1,25 @@
+﻿<script type="text/template" id="createProject"> 
+<div  class='form' id='createForm' >
+    <div> <span class="cancelButton" id="closeDialog">&times; Close</span></div>
+
+    <h3>Create a new Project</h3>
+    <div id="createForm">
+        <div class="editor-label"> <label for="Title">Short Description</label> </div>
+        <div class="editor-field">
+            <input class="text-box single-line" id="Title" name="Title" type="text" value="" /> 
+        </div>
+        <div class="editor-label"> <label for="Detail">Detail</label> </div>
+        <div class="editor-field">
+           <textarea id="Detail" rows="20" cols="50">{{Detail}}</textarea>
+        </div>
+
+        <div class="editor-label">
+            <label for="Completed">Completed</label> 
+        </div>
+        <div class="editor-field">
+            <input class="check-box" id="Completed" name="Completed" type="checkbox" value="" />
+        </div>
+        <div class='link button' id="ComfirmProjectCreate">Comfirm New Project</div> 
+     </div>    
+</div>  
+</script> 

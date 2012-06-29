@@ -35,7 +35,6 @@ if (!fbi) { var fbi = {}; }
 
 	root.project = {
 		subTasks: [],
-
 		create: function createProject() {
 			var data = {
 				Title: $('#Title').val(),

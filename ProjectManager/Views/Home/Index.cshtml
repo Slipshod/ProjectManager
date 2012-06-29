@@ -2,9 +2,6 @@
 @{
     ViewBag.Title = "Chris' Breakable Toy";
 }
-<div class="dialogOverlay" style="display: none;"></div>
-<div class="dialog" id="dialogTarget" style="display: none;"></div>
-
 @section featured {
 <section class="featured">
     <div class="content-wrapper">
@@ -22,88 +19,16 @@
 
 <div class="custom"><h3>This is a test.  If this is styled then the server side CSS bundling is working</h3></div>
 <hr />
-<div><span class="link button" id="linkNewProject">Create a new Project</span> </div>
-
-@Html.Action("ProjectList", "Project")
 
 
+@Html.Action("List", "Project")
 
 
 
 
-<script type="text/template" id="createProject"> 
-<div  class='form' id='createForm' >
-    <div> <span class="cancelButton" id="closeDialog">&times; Close</span></div>
 
-    <h3>Create a new Project</h3>
-    <div id="createForm">
-        <div class="editor-label"> <label for="Title">Short Description</label> </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Title" name="Title" type="text" value="" /> 
-        </div>
-        <div class="editor-label"> <label for="Detail">Detail</label> </div>
-        <div class="editor-field">
-           <textarea id="Detail" rows="20" cols="50">{{Detail}}</textarea>
-        </div>
 
-        <div class="editor-label">
-            <label for="Completed">Completed</label> 
-        </div>
-        <div class="editor-field">
-            <input class="check-box" id="Completed" name="Completed" type="checkbox" value="" />
-        </div>
-        <div class='link button' id="ComfirmProjectCreate">Comfirm New Project</div> 
-     </div>    
-</div>  
-</script> 
 
-<script type="text/template" id="editProject">
-<div class='form' id="editForm">
-
-   <div> <span class="cancelButton" id="closeDialog">&times; Close</span></div>
-
-    <h3>This is the Edit Mustache dialog</h3>
-    <div id="editForm">
-    <input  id="ProjectID" name="ProjectID" type="hidden" value="{{ProjectID}}" />
-
-        <div class="editor-label"> <label for="Title">Short Description</label> </div>
-        <div class="editor-field">
-            <input class="text-box single-line" id="Title" name="Title" type="text" value="{{Title}}" /> 
-        </div>
-        <div class="editor-label"> <label for="Detail">Detail</label> </div>
-        <div class="editor-field">
-           <textarea id="Detail" rows="20" cols="50">{{Detail}}</textarea>
-        </div>
-
-        <div class="editor-label">
-            <label for="Completed">Completed</label> 
-        </div>
-        <div class="editor-field">
-            <input class="check-box" id="Completed" name="Completed" type="checkbox" value="{{Completed}}" />
-        </div>
-        <div class='link button' id="ComfirmProjectEdit">Comfirm Edit</div>
-        
-        
-    </div>    
-</div>    
-</script>
-
-<script type="text/template" id="deleteProject">
-<div class="form" id="deleteForm">
-    <div><span class="cancelButton" id="closeDialog">&times; Close</span></div>
-    <h3>Are you sure you want to delete this?</h3>
-    <div>
-        <input  id="ProjectID" name="ProjectID" type="hidden" value="{{ProjectID}}" />
-        <div class="display-label">
-            <label for="Title">Title</label>
-        </div>
-        <div class="display-field">
-            <input disabled="disabled" value="{{Title}}"/>
-        </div>
-        <div class='link button' id="ComfirmProjectRemove">Comfirm Delete</div>
-    </div>
-</div>  
-</script>
 
 
 

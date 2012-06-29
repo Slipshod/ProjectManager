@@ -1,19 +1,23 @@
-﻿<div class="projectlist" id="projectList">
-        <table class="projectListTable">
-            <thead>
-                <tr>
-                    <th class="titleColumn">Short Description</th>
-                    <th class="detailColumn">Detail</th>
-                    <th class="completedColumn">Completed</th>
-                    <th class="actionsColumn">Actions</th>
-                </tr>
-            </thead>
-            <tbody id="tablerow"> </tbody> 
-            <tfoot></tfoot>
-        </table>       
+﻿<div class="dialogOverlay" style="display: none;"></div>
+<div class="dialog" id="dialogTarget" style="display: none;"></div>
+
+<div class="projectlist" id="projectList">
+<div><span class="link button" id="linkNewProject">Create a new Project</span> </div>    
+    <table class="projectListTable">
+        <thead>
+            <tr>
+                <th class="titleColumn">Short Description</th>
+                <th class="detailColumn">Detail</th>
+                <th class="completedColumn">Completed</th>
+                <th class="actionsColumn">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="tablerow"> </tbody> 
+        <tfoot></tfoot>
+    </table>       
 </div>
 <hr />
-   
+
 <script type="text/mustache" id="projectListTemplate">
 {{#projects}}
 <tr>    
@@ -21,10 +25,20 @@
     <td class="detailColumn">{{Detail}}</td>
     <td class="completedColumn">{{Completed}}</td>
     <td class="actionsColumn">
-        <a data-id="{{ProjectID}}" class="editLink project" >Edit</a> |
-        <a data-id="{{ProjectID}}" class="deleteLink project">Delete</a>
+        <span data-id="{{ProjectID}}" class="editLink project" >Edit</span> |
+        <span data-id="{{ProjectID}}" class="deleteLink project">Delete</span>
     </td>
 </tr>
 {{/projects}}
-
 </script>
+
+@{
+    Html.RenderPartial("Create");
+    Html.RenderPartial("Edit");
+    Html.RenderPartial("Delete");
+}
+
+
+
+
+
