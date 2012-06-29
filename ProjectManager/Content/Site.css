@@ -14,20 +14,7 @@ body {
     padding: 0;
 }
 
-
-
 /* Project List Partial Styling */
-.deleteLink, .editLink {
-    cursor: pointer;
-    font-size: 1em;
-    font-weight: bold;
-    text-decoration: none;
-    color: oldlace;
-}
-.deleteLink a:hover, .editLink a:hover {
-    text-decoration: underline;
-    
-}
 .projectListTable {
     border: 1px solid;
     border-color: black;    
@@ -111,6 +98,62 @@ body {
 
 
 /* Project List Partial Styling */
+/* Link Styling */
+.cancelButton {
+    color: orange;
+    background-color: black;
+    font-size: 1.25em;
+    border-radius: 3px;
+    
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 10px;
+    text-decoration: none;
+    font-size: 1.25em;
+    padding: .25em;
+}
+
+.cancelButton:hover {
+    color: black;
+    background-color: orange;
+    cursor: pointer;
+}
+
+
+
+.link 
+{
+    color: #333;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    margin: .1em;
+    padding: .2em;
+}
+
+.link:hover {
+    background-color: #333;
+    color: oldlace;
+}
+
+.deleteLink:hover, .editLink:hover {
+    background-color: #c7d1d6;
+    color: #3f3f3f;
+}
+
+.button{} 
+
+
+.deleteLink, .editLink {
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    text-decoration: none;
+    color: oldlace;
+}
+
 a:link, a:visited,
 a:active, a:hover {
     color: #333;
@@ -121,7 +164,7 @@ a:active, a:hover {
 a:hover {
     background-color: #c7d1d6;
 }
-
+/* END Link Styling */
 
 header, footer, hgroup,
 nav, section {
@@ -416,7 +459,7 @@ aside {
 /* forms */
 div .form 
 {
-    border: 1px solid navy;
+    border: none;
     border-radius: 10px;
     
     
@@ -629,13 +672,6 @@ opacity: 0.9;
     z-index: 10;
 }
     
-.butCloseDialog{
-    position: absolute;
-    display: block;
-    top: 5px;
-    right: 10px;
-    text-decoration: none;
-    font-size: 1.25em;
-    }       
+      
 
 

@@ -107,9 +107,8 @@ namespace ProjectManager.Controllers
         }
         
         private IList<Project> GetProjects()
-        {
-            var projects = _db.Projects.ToList();
-            return projects;
+        {   
+            return _db.Projects.ToList();
         }
 
         public ActionResult GetProjectsJson()
@@ -137,8 +136,7 @@ namespace ProjectManager.Controllers
                 project.SubTasks = _db.SubTasks.Where(t => t.ProjectID == id);
             }
 
-
-            return View( Json(new {projects}, JsonRequestBehavior.AllowGet) );
+            return PartialView( Json(new {projects}, JsonRequestBehavior.AllowGet) );
         }
 
     }
