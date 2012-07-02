@@ -242,9 +242,7 @@
   <ItemGroup>
     <Content Include="Views\Home\About.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Shared\EditorTemplates\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Views\Project\Edit.cshtml" />
   </ItemGroup>
