@@ -12,7 +12,5 @@ namespace ProjectManager.DataManager
     {
         public DbSet<Project> Projects { get; set; }
         public DbSet<SubTask> SubTasks { get; set; }
-
-
     }
 }

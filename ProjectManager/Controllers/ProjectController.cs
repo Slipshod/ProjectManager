@@ -32,13 +32,6 @@ namespace ProjectManager.Controllers
             _db = db;
         }
 
-
-        public JsonResult Create()
-        {
-            var project = new Project();
-            return Json(project, JsonRequestBehavior.AllowGet);
-        }
-
         [HttpPost]
         public ActionResult Create(ProjectViewModel model)
         {
@@ -51,6 +44,7 @@ namespace ProjectManager.Controllers
             return Json(new { Success = false });
         }
 
+        [HttpGet]
         public ActionResult Edit(ProjectViewModel model)
         {
             return GetProjectJson(model.ProjectID);
@@ -74,8 +68,9 @@ namespace ProjectManager.Controllers
 
        [HttpPost, ActionName("Delete")]
         public ActionResult ConfirmDelete(ProjectViewModel model)
-        {
-            var project = _db.Projects.Find(model.ProjectID);
+       {
+           var project = _db.Projects.Find(model.ProjectID);
+
             if (ModelState.IsValid)
             {
                 _db.Projects.Remove(project);
@@ -85,6 +80,7 @@ namespace ProjectManager.Controllers
 
            // Delete will also have to recursively delete all related subtask records since we don't want to rely on the database to do that.
            // Or not.  Do I need to care about if I may (though i AM planning on) move to a different storage engine?  Possibly RavenDB.
+           // Either way Subtasks are currently being orphaned in the database and that needs to be corrected one way or another.
            // With the understanding that THAT specific logic would absolutely not live in the controller
         }
 
@@ -96,22 +92,9 @@ namespace ProjectManager.Controllers
         }
 
       
-        private IList<Project> GetProjects()
-        {
-            var projects = _db.Projects.ToList();
-            foreach (var project in projects)
-            {
-                var id = project.ProjectID;
-                project.SubTasks = _db.SubTasks.Where(t => t.ProjectID == id);
-            }
-
-            return projects;
-        }
-
         public ActionResult GetProjectsJson()
         {
             var project = new Project();
-            
             return Json(new { projects = project.GetProjects(_db) }, JsonRequestBehavior.AllowGet);
         }
 
@@ -126,7 +109,7 @@ namespace ProjectManager.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-            return PartialView(Json(new { projects = GetProjects() }));
+            return PartialView(GetProjectsJson());
         }
 
     }
