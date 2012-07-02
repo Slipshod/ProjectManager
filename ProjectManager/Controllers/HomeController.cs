@@ -14,11 +14,8 @@ namespace ProjectManager.Controllers
        
         public ActionResult Index()
         {
-            var  db = new ProjectManagerDbContext();
-            var projects = db.Projects.ToList();
-
             ViewBag.Message = "Personal Project Manager";
-            return View(projects);
+            return View();
         }
 
         public ActionResult About()

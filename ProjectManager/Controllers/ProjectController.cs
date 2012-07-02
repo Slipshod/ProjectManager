@@ -10,6 +10,11 @@ using ProjectManager.DataManager;
 using ProjectManager.ViewModels;
 
 namespace ProjectManager.Controllers
+
+    // Current work scope: Remove database cues out of the controller to abstract the storage engine / Data Access Layer from the controller.
+    // This will mean figuring out how to get the reference to ProjectManagerDbContext out of the controller as well.  IoC? Dependancy Injection? I don't know yet.
+    // Other tasks: While refactoring, start working on the Interface, and figure out how to implement an interface for the server (eg, make a solid API).
+    // Start implementing Unit Tests and start working from a TDD perspective
 {
     public class ProjectController : Controller 
     {
@@ -18,6 +23,7 @@ namespace ProjectManager.Controllers
         public ProjectController()
         {
             _db = new ProjectManagerDbContext();
+
         }
 
         public ProjectController(ProjectManagerDbContext db)
@@ -38,35 +44,27 @@ namespace ProjectManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var project = Mapper.Map<ProjectViewModel, Project>(model);
-                _db.Projects.Add(project);
-                _db.SaveChanges();
-                return Json(new
-                                {
-                                    Success = true
-                                });
+                model.Create(_db);
+                return Json(new { Success = true } );
             }
 
-            return Json(new
-                            {
-                                Success = false
-                            });
+            return Json(new { Success = false });
         }
+
         public ActionResult Edit(ProjectViewModel model)
         {
             return GetProjectJson(model.ProjectID);
         }
 
         [HttpPost, ActionName("Edit")]
-        public ActionResult ConfirmEdit(Project model)
+        public ActionResult ConfirmEdit(ProjectViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(model).State = EntityState.Modified;
-                _db.SaveChanges();
-                
+                model.Edit(_db);
+                return Json(new { Success = true });    
             }
-            return Json(new { Success = true });
+            return Json(new {Success = false });
         }
 
         public ActionResult Delete(ProjectViewModel model)
@@ -85,7 +83,9 @@ namespace ProjectManager.Controllers
             }
             return Json(new {Success = true});
 
-           //Delete will also have to recursively delete all related subtask records since we don't want to rely on the database to do that.
+           // Delete will also have to recursively delete all related subtask records since we don't want to rely on the database to do that.
+           // Or not.  Do I need to care about if I may (though i AM planning on) move to a different storage engine?  Possibly RavenDB.
+           // With the understanding that THAT specific logic would absolutely not live in the controller
         }
 
 
@@ -110,10 +110,12 @@ namespace ProjectManager.Controllers
 
         public ActionResult GetProjectsJson()
         {
-            return Json(new { projects = GetProjects()}, JsonRequestBehavior.AllowGet);
+            var project = new Project();
+            
+            return Json(new { projects = project.GetProjects(_db) }, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult GetProjectJson(int id) //might be named "DetailsJson"
+        public ActionResult GetProjectJson(int id) 
         {
             var project = _db.Projects.Find(id);
             project.SubTasks = _db.SubTasks.Where(st => st.ProjectID == project.ProjectID);
@@ -124,9 +126,7 @@ namespace ProjectManager.Controllers
         [ChildActionOnly]
         public ActionResult List()
         {
-//            var proj = GetProjects();
-//            var projectsJson = new {projects = proj};
-            return PartialView( );
+            return PartialView(Json(new { projects = GetProjects() }));
         }
 
     }

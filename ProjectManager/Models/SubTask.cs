@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProjectManager.Models
 {
-    public class SubTask : ISavable
+    public class SubTask 
     {
         public int SubTaskId { get; set; }
         public string Title { get; set; }
